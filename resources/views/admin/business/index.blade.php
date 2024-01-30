@@ -24,12 +24,13 @@
                         <tbody>
                             @foreach ($business as $item)
                             <tr>
-                                <td>{{ Str::ucfirst($item->resident->firstName) . ' ' . Str::ucfirst($item->resident->lastName) }}</td>
+                                <td>{{ Str::ucfirst($item->resident->firstName) . ' ' .
+                                    Str::ucfirst($item->resident->lastName) }}</td>
                                 <td>{{ Str::ucfirst($item->businessName) }}</td>
                                 <td>{{ Str::ucfirst($item->businessAddress) }}</td>
                                 <td><label
                                         class=" {{ $item->resident->status == '1' ? 'text-success' : 'text-danger' }}">{{
-                                        $item->status == '1' ? 'Active' : 'Inactive'
+                                        $item->resident->status == '1' ? 'Active' : 'Inactive'
                                         }}</label></td>
                                 <td>
                                     <a href="{{ route('business_permits.edit', $item->id) }}"
@@ -37,7 +38,7 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
 
-                                     {{-- <a href="{{ route('business_permits.show', $item->id) }}"
+                                    {{-- <a href="{{ route('business_permits.show', $item->id) }}"
                                         class="btn btn-secondary py-1 btn-icon float-start me-2">
                                         <i class="fas fa-print"></i>
                                     </a> --}}

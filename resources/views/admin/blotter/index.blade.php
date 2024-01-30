@@ -6,34 +6,42 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
-                    <h4 class="card-title">Users Overview</h4>
-                    <a title="new" href="{{ route('user_infos.create') }}" class="btn btn-sm btn-info py-2 mb-2">Add
-                        User</a>
+                    <h4 class="card-title">Blotter Records</h4>
+                    <a title="new" href="{{ route('blotters.create') }}" class="btn btn-sm btn-info py-2 mb-2">Add
+                        Blotter
+                    </a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover" id="myTable">
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Date Created</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Encoded By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $item)
+                            @foreach ($blotter as $item)
                             <tr>
-                                <td>{{ Str::ucfirst($item->name) }}</td>
-                                <td>{{ Str::ucfirst($item->email) }}</td>
-                                <td>{{ Str::ucfirst($item->role) }}</td>
-                                <td>{{ $item->created_at->format('Y-m-d') }}</td>
+                                <td>{{ Str::upper($item->resident->firstName). " ".
+                                    Str::upper($item->resident->lastName)}}</td>
+                                <td>{!! Str::limit($item->description, 50, '...') !!}</td>
+                                <td>{{ $item->date }}</td>
+                                <td>{{ $item->officer->name }}</td>
                                 <td>
-                                    <a href="{{ route('user_infos.edit', $item->id) }}"
+                                    <a href="{{ route('blotters.edit', $item->id) }}"
                                         class="btn btn-info py-1 btn-icon float-start me-2">
                                         <i class="fas fa-edit"></i>
                                     </a>
-
+                                    {{-- <form method="post" action="{{ route('blotters.destroy', $item->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger py-1 btn-icon">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form> --}}
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal{{ $item->id }}">
@@ -50,13 +58,13 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Are you sure you want to delete this user?
+                                                    Are you sure you want to delete this blotter?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Cancel</button>
                                                     <!-- Actual delete form -->
-                                                    <form action="{{ route('user_infos.destroy', $item->id) }}"
+                                                    <form action="{{ route('blotters.destroy', $item->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -70,13 +78,13 @@
                                 </td>
                             </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 @endsection
 @section('scripts')

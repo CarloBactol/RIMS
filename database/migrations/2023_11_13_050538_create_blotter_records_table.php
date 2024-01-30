@@ -18,7 +18,7 @@ class CreateBlotterRecordsTable extends Migration
             $table->unsignedBigInteger('residentID');
             $table->foreign('residentID')->references('id')->on('residents')->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
-            $table->text('description');
+            $table->longText('description');
             $table->unsignedBigInteger('officerID')->nullable();
             $table->timestamps();
         });

@@ -1,13 +1,18 @@
 <?php
 
+use App\Http\Controllers\Blotter;
+use App\Http\Controllers\UserInfo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BlotterController;
 use App\Http\Controllers\ProccessController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\BarangayLGUController;
+use App\Http\Controllers\BlotterPersonController;
 use App\Http\Controllers\BusinessPermitController;
 
 /*
@@ -21,9 +26,11 @@ use App\Http\Controllers\BusinessPermitController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::redirect('/', 'login');
 
 Auth::routes();
 
@@ -31,13 +38,16 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
-Route::middleware(['auth', 'log.user.activity'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'isUserRole'])->prefix('admin')->group(function () {
     // Route::resource('residents', ResidentController::class);
 
     Route::get('/search', [SearchController::class, 'search'])->name('search.index');
     Route::post('/person/{id}/confirm-delete', [SearchController::class, 'delete'])->name('residents.confirm-delete');
     Route::resource('business_permits', BusinessPermitController::class)->except('show');
+    Route::resource('user_infos', UserInfo::class)->except('show');
     Route::resource('baranagay_l_g_u_s', BarangayLGUController::class)->except('show');
+    Route::resource('blotters', BlotterController::class)->except('show');
+    Route::resource('blotter_persons', BlotterPersonController::class)->except('show');
     Route::get('/autosuggest', [ProccessController::class, 'index'])->name('autosuggest');
 
     Route::get('/persons', [PersonController::class, 'index'])->name('persons.index');

@@ -12,11 +12,11 @@ class BarangayLGU extends Model
 
     // Add other fields that you want to be mass-assignable
     protected $fillable = [
-            'firstName', 
-            'middleName', 
-            'lastName',
-            'isSecretary',
-            'isTreasurer',
-            'role'
+        'firstName',
+        'middleName',
+        'lastName',
+        'isSecretary',
+        'isTreasurer',
+        'role'
     ];
 }

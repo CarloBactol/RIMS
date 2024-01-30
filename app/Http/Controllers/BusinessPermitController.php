@@ -28,7 +28,6 @@ class BusinessPermitController extends Controller
     {
         $residents = Resident::with('business')->get();
         return view('admin.business.create', compact('residents'));
-        
     }
 
     /**
@@ -88,7 +87,7 @@ class BusinessPermitController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'residentID' => 'required|unique:business_permits,residentID,' .$id,
+            'residentID' => 'required|unique:business_permits,residentID,' . $id,
             'businessName' => 'required|min:2',
             'businessAddress' => 'required|min:5',
         ]);

@@ -6,6 +6,10 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
+    // protected $middlewarePriority = [
+    //     \App\Http\Middleware\Authenticate::class,
+    //     \App\Http\Middleware\VerifyCsrfToken::class,
+    // ];
     /**
      * The application's global HTTP middleware stack.
      *
@@ -37,6 +41,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // \App\Http\Middleware\SessionExpired::class,
         ],
 
         'api' => [
@@ -63,6 +68,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'log.user.activity' => \App\Http\Middleware\LogUserActivity::class,
+        // 'log.user.activity' => \App\Http\Middleware\LogUserActivity::class,
+        'isUserRole' => \App\Http\Middleware\UserMiddleware::class,
     ];
 }

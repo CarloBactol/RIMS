@@ -20,4 +20,9 @@ class BlotterRecord extends Model
     {
         return $this->belongsTo(Resident::class, 'residentID', 'id');
     }
+
+    public function officer()
+    {
+        return $this->belongsTo(User::class, 'officerID', 'id')->withDefault(true);
+    }
 }

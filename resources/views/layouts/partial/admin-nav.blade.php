@@ -7,7 +7,7 @@
         </div>
         <div>
             <a class="navbar-brand brand-logo" href="{{ route('dashboard') }}">
-                RIMS
+                Residents' Information Management System
                 {{-- <img src="{{ asset('images/logo.svg')}}" alt="logo" /> --}}
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard') }}">
@@ -20,7 +20,7 @@
         <ul class="navbar-nav">
             @auth
             <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">{{
+                <h1 class="welcome-text">Hello, <span class="text-black fw-bold">{{
                         Str::ucfirst(Auth::user()->name) }}</span>
                 </h1>
                 <h3 class="welcome-sub-text">Your performance summary this week </h3>

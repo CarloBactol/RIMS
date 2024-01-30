@@ -280,6 +280,7 @@
     <script>
         toastr.warning("{{ session('warning') }}")
     </script>
+
     @endif
     @yield('scripts')
 

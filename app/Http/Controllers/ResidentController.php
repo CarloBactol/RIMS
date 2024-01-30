@@ -118,7 +118,7 @@ class ResidentController extends Controller
             'firstName' => 'required|min:2',
             'lastName' => 'required|min:2',
             'address' => 'required',
-            'dateOfBirth' => 'required',
+            'dateOfBirth' => 'date',
             'gender' => 'required',
             'contactNumber' => 'required|digits:11|unique:residents,contactNumber,' . $id,
             'nationality' => 'required',

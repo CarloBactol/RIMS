@@ -40,6 +40,25 @@
             </div>
         </li>
 
+        <li class="nav-item nav-category">Blotter Management</li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#blotter" aria-expanded="false" aria-controls="blotter">
+                <i class="menu-icon mdi mdi-comment-check"></i>
+                <span class="menu-title">Category</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="blotter">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('blotters.index') }}">Blotter
+                            Record</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('blotter_persons.create') }}">Add
+                            Person</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
         <li class="nav-item nav-category">Elected Council</li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#lgus" aria-expanded="false" aria-controls="lgus">
@@ -66,6 +85,22 @@
             <div class="collapse" id="track">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="{{ route('trackings.index') }}">Activity
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item nav-category">Account Center</li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
+                <i class="menu-icon mdi mdi-account-multiple"></i>
+                <span class="menu-title">Category</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="user">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('user_infos.index') }}">Users
                         </a>
                     </li>
                 </ul>

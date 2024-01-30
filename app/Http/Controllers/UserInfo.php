@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class UserInfo extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('admin.user.index', compact("users"));
     }
 
     /**
@@ -23,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.create');
     }
 
     /**
@@ -32,9 +36,15 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = new User();
+        $user->email = $request->input('email');
+        $user->name = $request->input('name');
+        $user->role = "employee";
+        $user->password = Hash::make("adminpass");
+        $user->save();
+        return redirect()->route('user_infos.index')->with("success", "User saved successfully.");
     }
 
     /**
@@ -56,7 +66,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::findOrFail($id);
+        return view('admin.user.edit', compact('users'));
     }
 
     /**
@@ -66,9 +77,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $user =  User::findOrFail($id);
+        $user->email = $request->input('email');
+        $user->name = $request->input('name');
+        $user->save();
+        return redirect()->route('user_infos.index')->with("info", "User updated successfully.");
     }
 
     /**
@@ -79,6 +94,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user =  User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('user_infos.index')->with("danger", "User deleted successfully.");
     }
 }

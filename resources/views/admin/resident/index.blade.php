@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
 {{-- <h1>Search Filter</h1> --}}
 
 <div class="row">
@@ -154,111 +153,183 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('#searchInput').on('keyup', function () {
-            let query = $(this).val();
+    $(document).ready(function() {
+            $('#searchInput').on('keyup', function() {
+                let query = $(this).val();
 
-            if (query.length >= 3) {
-                $.ajax({
-                    url: '{{ route("search.index") }}',
-                    type: 'GET',
-                    data: { query: query },
-                    success: function (data) {
-                        displayResults(data);
-                    }
-                });
-            } else {
+                if (query.length >= 3) {
+                    $.ajax({
+                        url: '{{ route('search.index') }}',
+                        type: 'GET',
+                        data: {
+                            query: query
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            displayResults(data);
+                        }
+                    });
+                } else {
+                    $('#searchResultsBody').empty();
+                }
+            });
+
+
+
+            // function displayResults(results) {
+            //     $('#searchResultsBody').empty();
+            //     console.log(results);
+            //     $.each(results, function(index, result) {
+            //         var id = result.id;
+            //         let row = '<tr>' +
+            //             '<td>' + result.firstName + '</td>' +
+            //             '<td>' + result.lastName + '</td>' +
+            //             '<td>' + result.gender + '</td>' +
+            //             '<td>' + result.address + '</td>' +
+            //             '<td>' + result.barangay + '</td>' +
+            //             '<td>' + result.purpose + '</td>' +
+            //             '<td>' + result.contactNumber + '</td>' +
+            //             '<td>' + result.civilStatus + '</td>' +
+            //             '<td>' + result.nationality + '</td>' +
+            //             '<td>' + computeAgeWithMonths(result.dateOfBirth).years + ' year(s) old and ' +
+            //             computeAgeWithMonths(result.dateOfBirth).months + " month(s)" + '</td>' +
+            //             '<td>' + result.dateOfBirth + '</td>' +
+            //             '<td>' +
+            //             '<a href="/admin/persons/' + result.id +
+            //             '/edit" ><i class="mx-2 fa fa-edit fa-2x"></i></a>' + ' ' +
+            //             '<a href="/admin/persons/' + result.id +
+            //             '/show" ><i class="mx-2 fa fa-eye fa-2x"></i></a>' + ' ' +
+            //             `  <!-- Button trigger modal -->
+            //                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+            //                             data-bs-target="#exampleModal${result.id}">
+            //                             <i class="fas fa-trash" style="margin: 4px 0px"></i>
+            //                         </button>
+            //                         <!-- Modal -->
+            //                         <div class="modal fade" id="exampleModal${result.id}" tabindex="-1"
+            //                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            //                             <div class="modal-dialog">
+            //                                 <div class="modal-content">
+            //                                     <div class="modal-header">
+            //                                         <h5 class="modal-title" id="exampleModalLabel">Confirmation!</h5>
+            //                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
+            //                                             aria-label="Close"></button>
+            //                                     </div>
+            //                                     <div class="modal-body">
+            //                                         Are you sure you want to delete this user?
+            //                                     </div>
+            //                                     <div class="modal-footer">
+            //                                         <button type="button" class="btn btn-secondary"
+            //                                             data-bs-dismiss="modal">Cancel</button>
+            //                                         <!-- Actual delete form -->
+            //                                         <form action="/admin/persons/${result.id}"
+            //                                             method="POST">
+            //                                             @csrf
+            //                                             @method('DELETE')
+            //                                             <button type="submit"
+            //                                                 class="btn btn-danger my-2">Delete</button>
+            //                                         </form>
+            //                                     </div>
+            //                                 </div>
+            //                             </div>
+            //                         </div>` +
+            //             '</td>' +
+            //             '</tr>';
+
+            //         $('#searchResultsBody').append(row);
+
+            //         var initialAction = $("#deleteForm").attr("action");
+
+            //         // Function to update form action with the provided ID
+            //         function updateFormAction(id) {
+            //             var newAction = initialAction.replace(':id', id);
+            //             $("#deleteForm").attr("action", newAction);
+            //         }
+
+            //         // Example usage: Update the form action with the desired ID
+            //         var residentId = 0; // Replace this with your actual ID
+            //         updateFormAction(residentId);
+            //     });
+            // }
+
+
+
+            // update
+            function displayResults(results) {
                 $('#searchResultsBody').empty();
+                console.log(results);
+
+                $.each(results, function(index, result) {
+                    var id = result.id;
+
+                    let row = '<tr>' +
+
+                        '<td>' + result.firstName + '</td>' +
+                        '<td>' + result.lastName + '</td>' +
+                        '<td>' + result.gender + '</td>' +
+                        '<td>' + result.address + '</td>' +
+                        '<td>' + result.barangay + '</td>' +
+                        '<td>' + result.purpose + '</td>' +
+                        '<td>' + result.contactNumber + '</td>' +
+                        '<td>' + result.civilStatus + '</td>' +
+                        '<td>' + result.nationality + '</td>' +
+                        '<td>' + computeAgeWithMonths(result.dateOfBirth).years + ' year(s) old and ' +
+                        computeAgeWithMonths(result.dateOfBirth).months + " month(s)" + '</td>' +
+                        '<td>' + result.dateOfBirth + '</td>' +
+                        '<td>' +
+                        '<a href="/admin/persons/' + result.id +
+                        '/edit"><i class="mx-2 fa fa-edit fa-2x"></i></a>' + ' ' +
+                        '<a href="/admin/persons/' + result.id +
+                        '/show"><i class="mx-2 fa fa-eye fa-2x"></i></a>' + ' ' +
+                        '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal' +
+                        result.id + '"><i class="fas fa-trash" style="margin: 4px 0px"></i></button>' +
+                        '</td>' +
+                        '</tr>';
+
+                    $('#searchResultsBody').append(row);
+
+                    // Update the form action dynamically for each modal
+                    $('#exampleModal' + result.id).on('show.bs.modal', function(event) {
+                        var modal = $(this);
+                        var formAction = "/admin/persons/" + result.id;
+
+                        modal.find('.modal-footer form').attr('action', formAction);
+                    });
+                });
             }
-        });
 
 
-
-        function displayResults(results) {
-            $('#searchResultsBody').empty();
-
-            $.each(results, function (index, result) {
-                var id = result.id;
-                let row = '<tr>' +
-                    '<td>' + result.firstName + '</td>' +
-                    '<td>' + result.lastName + '</td>' +
-                    '<td>' + result.gender + '</td>' +
-                    '<td>' + result.address + '</td>' +
-                    '<td>' + result.barangay + '</td>' +
-                    '<td>' + result.purpose + '</td>' +
-                    '<td>' + result.contactNumber + '</td>' +
-                    '<td>' + result.civilStatus + '</td>' +
-                    '<td>' + result.nationality + '</td>' +
-                    '<td>' + computeAgeWithMonths(result.dateOfBirth).years + ' year(s) old and ' + computeAgeWithMonths(result.dateOfBirth).months + " month(s)" + '</td>' +
-                    '<td>' + result.dateOfBirth + '</td>' +
-                    '<td>'
-                       +
-                    '<a href="/admin/persons/'+result.id +'/edit" ><i class="mx-2 fa fa-edit fa-2x"></i></a>' + ' ' +
-                    '<a href="/admin/persons/'+result.id +'/show" ><i class="mx-2 fa fa-eye fa-2x"></i></a>' + ' ' +
-                        `<form method="POST" action="/admin/persons/${result.id}">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit" class="btn btn-sm btn-danger mt-2" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></button>
-                        </form>` +
-                    '</td>' +
-                    '</tr>';
-                // Add more columns as needed
+            // '<button type="button" class="btn btn-danger"  '+ 'onclick=" '+confirmDelete(result.id)+' "' + '">Delete</button>' +
 
 
-                $('#searchResultsBody').append(row);
+            function computeAgeWithMonths(dateOfBirth) {
+                // Parse the date of birth string into a Date object
+                const dob = new Date(dateOfBirth);
 
-                var initialAction = $("#deleteForm").attr("action");
+                // Get the current date
+                const currentDate = new Date();
 
-                // Function to update form action with the provided ID
-                function updateFormAction(id) {
-                    var newAction = initialAction.replace(':id', id);
-                    $("#deleteForm").attr("action", newAction);
+                // Calculate the difference in years
+                const ageInYears = currentDate.getFullYear() - dob.getFullYear();
+
+                // Calculate the difference in months
+                let ageInMonths = currentDate.getMonth() - dob.getMonth();
+
+                // Adjust the months difference based on the day of the month
+                if (currentDate.getDate() < dob.getDate()) {
+                    ageInMonths--;
                 }
 
-                // Example usage: Update the form action with the desired ID
-                var residentId = 0; // Replace this with your actual ID
-                updateFormAction(residentId);
-            });
-        }
+                // If the months difference is negative, add 12 months to the age
+                if (ageInMonths < 0) {
+                    ageInMonths += 12;
+                }
 
-        // '<button type="button" class="btn btn-danger"  '+ 'onclick=" '+confirmDelete(result.id)+' "' + '">Delete</button>' +
-
-
-        function computeAgeWithMonths(dateOfBirth) {
-            // Parse the date of birth string into a Date object
-            const dob = new Date(dateOfBirth);
-
-            // Get the current date
-            const currentDate = new Date();
-
-            // Calculate the difference in years
-            const ageInYears = currentDate.getFullYear() - dob.getFullYear();
-
-            // Calculate the difference in months
-            let ageInMonths = currentDate.getMonth() - dob.getMonth();
-
-            // Adjust the months difference based on the day of the month
-            if (currentDate.getDate() < dob.getDate()) {
-                ageInMonths--;
+                return {
+                    years: ageInYears,
+                    months: ageInMonths
+                };
             }
 
-            // If the months difference is negative, add 12 months to the age
-            if (ageInMonths < 0) {
-                ageInMonths += 12;
-            }
-
-            return { years: ageInYears, months: ageInMonths };
-        }
-
-    });
-
-
+        });
 </script>
-
-
-
-
-
-
 @endsection
