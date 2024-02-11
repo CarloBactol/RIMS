@@ -21,7 +21,7 @@
                                     <label for="fname">First Name</label>
                                     <input type="text" class="form-control  @error('firstName') is-invalid @enderror"
                                         name="firstName" value="{{ old('firstName') }}" id="fname"
-                                        placeholder="firstName">
+                                        placeholder="First Name">
                                     @error('firstName')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -34,7 +34,8 @@
                                 <div class="form-group">
                                     <label for="lname">Last Name</label>
                                     <input type="text" class="form-control @error('lastName') is-invalid @enderror"
-                                        name="lastName" value="{{ old('lastName') }}" id="lname" placeholder="lastName">
+                                        name="lastName" value="{{ old('lastName') }}" id="lname"
+                                        placeholder="Last Name">
                                     @error('lastName')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -63,6 +64,7 @@
                                     <input type="text" value="{{ old('contactNumber') }}"
                                         class="form-control  @error('contactNumber') is-invalid @enderror"
                                         name="contactNumber" id="contactNumber" placeholder="Phone number">
+                                    <small id="msg" class="text-danger"></small>
                                     @error('contactNumber')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -92,7 +94,7 @@
                                     <input type="date" value="{{ old('dateOfBirth') }}"
                                         class="form-control  @error('dateOfBirth') is-invalid @enderror"
                                         name="dateOfBirth" id="dateOfBirth">
-                                    @error('gender')
+                                    @error('dateOfBirth')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -107,9 +109,11 @@
                                     <label for="nationality">Nationality</label>
                                     <select name="nationality"
                                         class="form-control @error('nationality') is-invalid @enderror">
-                                        <option value="" selected disabled>Select Civil Status</option>
-                                        <option value="Filipino">Filipino</option>
-                                        <option value="Foreign">Foreign</option>
+                                        <option value="" disabled>Select Civil Status</option>
+                                        <option value="Filipino" {{ old('nationality')=='Filipino' ? 'selected' : '' }}>
+                                            Filipino</option>
+                                        <option value="Foreign" {{ old('nationality')=='Foreign' ? 'selected' : '' }}>
+                                            Foreign</option>
                                     </select>
                                     @error('nationality')
                                     <span class="invalid-feedback" role="alert">
@@ -124,11 +128,15 @@
                                     <label for="civilStatus">Civil Status</label>
                                     <select name="civilStatus"
                                         class="form-control @error('civilStatus') is-invalid @enderror">
-                                        <option value="" selected disabled>Select Nationality</option>
-                                        <option value="Single">Single</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Separated">Separated</option>
-                                        <option value="Annulled">Annulled</option>
+                                        <option value="" disabled>Select Nationality</option>
+                                        <option value="Single" {{ old('civilStatus')=='Single' ? 'selected' : '' }}>
+                                            Single</option>
+                                        <option value="Married" {{ old('civilStatus')=='Married' ? 'selected' : '' }}>
+                                            Married</option>
+                                        <option value="Separated" {{ old('civilStatus')=='Separated' ? 'selected' : ''
+                                            }}>Separated</option>
+                                        <option value="Annulled" {{ old('civilStatus')=='Annulled' ? 'selected' : '' }}>
+                                            Annulled</option>
                                     </select>
                                     @error('civilStatus')
                                     <span class="invalid-feedback" role="alert">
@@ -142,7 +150,7 @@
                         <div class="form-group">
                             <label for="purpose">Purpose</label>
                             <textarea name="purpose"
-                                class="form-control @error('purpose') is-invalid @enderror"></textarea>
+                                class="form-control @error('purpose') is-invalid @enderror">{{ old("purpose") }}</textarea>
                             @error('purpose')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -158,7 +166,7 @@
                                     <i class="input-helper"></i></label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button type="submit" class="btn btn-primary me-2" id="btnSubmit">Submit</button>
                         <a href="{{ route('persons.index') }}" class="btn btn-light">Cancel</a>
 
                     </form>
@@ -167,4 +175,69 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        var flag = false
+        $("#dateOfBirth").change(function (e) {
+            e.preventDefault();
+            var dob = $(this).val();
+            calculateAge(dob);
+        });
+
+        $("#contactNumber").change(function (e) {
+            e.preventDefault();
+            var pn = $(this).val();
+            isEmpty(pn)
+        });
+
+        function calculateAge(dob)
+        {
+
+                // Convert the birthdate string to a Date object
+                var birthdate = new Date(dob);
+
+                // Get the current date
+                var currentDate = new Date();
+
+                // Calculate the difference in years
+                var age = currentDate.getFullYear() - birthdate.getFullYear();
+
+                // Check if the birthday has occurred this year
+                if (currentDate.getMonth() < birthdate.getMonth() || (currentDate.getMonth() === birthdate.getMonth() && currentDate.getDate() < birthdate.getDate())) {
+                    age--;
+                }
+                if (age >= 18 ){
+                    flag = true;
+                    $("#msg").empty();
+                    $("#msg").html("Please enter a phone number");
+                    $("#btnSubmit").addClass("disabled");
+                }else{
+                    falg = false;
+                    $("#msg").empty();
+                    $("#btnSubmit").removeClass("disabled");
+                }
+        }
+
+        function isEmpty(pn)
+        {
+            if (flag){
+                if(pn.length == 11){
+                    console.log(pn.length);
+                    $("#btnSubmit").removeClass("disabled");
+                    $("#msg").empty();
+                }else{
+                    $("#msg").empty();
+                    $("#msg").html("Number should be 11 characters.");
+                    $("#btnSubmit").addClass("disabled");
+                }
+            }else{
+                $("#btnSubmit").removeClass("disabled");
+            }
+        }
+
+    });
+
+</script>
 @endsection

@@ -59,7 +59,7 @@
             </div>
         </li>
 
-        <li class="nav-item nav-category">Elected Council</li>
+        <li class="nav-item nav-category">Councilor Managment</li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#lgus" aria-expanded="false" aria-controls="lgus">
                 <i class="menu-icon mdi mdi-account-multiple"></i>
@@ -68,14 +68,14 @@
             </a>
             <div class="collapse" id="lgus">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('baranagay_l_g_u_s.index') }}">Council
+                    <li class="nav-item"><a class="nav-link" href="{{ route('baranagay_l_g_u_s.index') }}">Councilor
                         </a>
                     </li>
                 </ul>
             </div>
         </li>
 
-        <li class="nav-item nav-category">Login Tracking</li>
+        {{-- <li class="nav-item nav-category">Login Tracking</li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#track" aria-expanded="false" aria-controls="track">
                 <i class="menu-icon mdi mdi-account-multiple"></i>
@@ -89,7 +89,7 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> --}}
 
         <li class="nav-item nav-category">Account Center</li>
         <li class="nav-item">
@@ -101,6 +101,9 @@
             <div class="collapse" id="user">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="{{ route('user_infos.index') }}">Users
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('trackings.index') }}">Login History
                         </a>
                     </li>
                 </ul>

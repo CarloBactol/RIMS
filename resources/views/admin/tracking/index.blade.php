@@ -7,8 +7,6 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
                     <h4 class="card-title">Login Tracking Overview</h4>
-                    {{-- <a title="new" href="{{ route('business_permits.create') }}"
-                        class="btn btn-sm btn-info py-2 mb-2">Add Resident</a> --}}
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover" id="myTable">
@@ -16,8 +14,8 @@
                             <tr>
                                 <th>User</th>
                                 <th>Email</th>
-                                <th>Last loggedIn</th>
-                                <th>Last loggouted</th>
+                                <th>Last logIn</th>
+                                <th>Last logout</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,16 +24,19 @@
                                 <td>{{ Str::ucfirst($item->name)}}</td>
                                 <td>{{ Str::lower($item->email)}}</td>
                                 <td>
-                                    {{-- @php
+                                    @php
                                     $dt1 = \Carbon\Carbon::parse($item->last_login_at);
+                                    $dt2 = \Carbon\Carbon::parse($item->last_logout_at);
                                     @endphp
                                     {{
                                     $dt1->diffForHumans()
-                                    }} --}}
+                                    }}
                                     {{-- {{ date('j F, Y H:i:s', strtotime( $item->last_login_at)) }} --}}
-                                    {{ $item->last_login_at }}
+
                                 </td>
-                                <td>{{ $item->last_logout_at }}</td>
+                                <td>{{ $dt2->diffForHumans()}}</td>
+                                {{-- <td>{{ $item->last_logout_at }}</td> --}}
+
                             </tr>
                             @endforeach
                         </tbody>
@@ -44,7 +45,6 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 @section('scripts')

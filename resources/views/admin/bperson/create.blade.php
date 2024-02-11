@@ -8,8 +8,7 @@
                     <div class="d-flex justify-content-between">
                         <h4>Create Person</h4>
                         {{-- <a href="{{ route('admin.owners.index') }}" class="btn btn-md btn-info">Back</a> --}}
-                        <a href="{{ route('blotter_persons.index') }}"
-                            class="btn btn-inverse-primary btn-rounded btn-icon">
+                        <a href="{{ route('blotters.index') }}" class="btn btn-inverse-primary btn-rounded btn-icon">
                             <i class="ti-arrow-left"></i>
                         </a>
                     </div>

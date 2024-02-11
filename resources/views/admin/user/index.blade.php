@@ -18,7 +18,9 @@
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Date Created</th>
-                                <th>Action</th>
+                                @if (Auth::user()->role == 'admin')
+                                <th></th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -28,6 +30,7 @@
                                 <td>{{ Str::ucfirst($item->email) }}</td>
                                 <td>{{ Str::ucfirst($item->role) }}</td>
                                 <td>{{ $item->created_at->format('Y-m-d') }}</td>
+                                @if (Auth::user()->role == 'admin')
                                 <td>
                                     <a href="{{ route('user_infos.edit', $item->id) }}"
                                         class="btn btn-info py-1 btn-icon float-start me-2">
@@ -68,6 +71,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
 

@@ -7,7 +7,7 @@
         </div>
         <div>
             <a class="navbar-brand brand-logo" href="{{ route('dashboard') }}">
-                Residents' Information Management System
+                RIMS
                 {{-- <img src="{{ asset('images/logo.svg')}}" alt="logo" /> --}}
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard') }}">

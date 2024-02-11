@@ -66,6 +66,7 @@
                                     <input type="text" value="{{ $resident->contactNumber }}"
                                         class="form-control  @error('contactNumber') is-invalid @enderror"
                                         name="contactNumber" id="contactNumber" placeholder="Phone number">
+                                    <small id="msg" class="text-danger"></small>
                                     @error('contactNumber')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -172,7 +173,7 @@
                                     <i class="input-helper"></i></label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button type="submit" class="btn btn-primary me-2" id="btnSubmit">Submit</button>
                         <a href="{{ route('persons.index') }}" class="btn btn-light">Cancel</a>
 
                     </form>
@@ -181,4 +182,70 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        var flag = false
+        $("#dateOfBirth").change(function (e) {
+            e.preventDefault();
+            var dob = $(this).val();
+            calculateAge(dob);
+        });
+
+        $("#contactNumber").change(function (e) {
+            e.preventDefault();
+            var pn = $(this).val();
+            isEmpty(pn)
+        });
+
+        function calculateAge(dob)
+        {
+
+                // Convert the birthdate string to a Date object
+                var birthdate = new Date(dob);
+
+                // Get the current date
+                var currentDate = new Date();
+
+                // Calculate the difference in years
+                var age = currentDate.getFullYear() - birthdate.getFullYear();
+
+                // Check if the birthday has occurred this year
+                if (currentDate.getMonth() < birthdate.getMonth() || (currentDate.getMonth() === birthdate.getMonth() && currentDate.getDate() < birthdate.getDate())) {
+                    age--;
+                }
+                if (age >= 18 ){
+                    flag = true;
+                    $("#msg").empty();
+                    $("#msg").html("Please enter a phone number");
+                    $("#btnSubmit").addClass("disabled");
+                }else{
+                    falg = false;
+                    $("#msg").empty();
+                    $("#btnSubmit").removeClass("disabled");
+                }
+        }
+
+        function isEmpty(pn)
+        {
+            if (flag){
+                if(pn.length == 11){
+                    console.log(pn.length);
+                    $("#btnSubmit").removeClass("disabled");
+                    $("#msg").empty();
+                }else{
+                    $("#msg").empty();
+                    $("#msg").html("Number should be 11 characters.");
+                    $("#btnSubmit").addClass("disabled");
+                }
+            }else{
+                $("#btnSubmit").removeClass("disabled");
+            }
+        }
+
+    });
+
+</script>
 @endsection
