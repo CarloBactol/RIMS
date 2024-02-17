@@ -8,7 +8,7 @@
         </li>
 
         <li class="nav-item nav-category">Resident Management</li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#services" aria-expanded="false"
                 aria-controls="services">
                 <i class="menu-icon mdi mdi-account-multiple-plus-outline"></i>
@@ -17,10 +17,11 @@
             </a>
             <div class="collapse" id="services">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('persons.index') }}">Residents</a>
-                    </li>
+
                 </ul>
             </div>
+        </li> --}}
+        <li class="nav-item"><a class="nav-link" href="{{ route('persons.index') }}">Residents</a>
         </li>
 
         <li class="nav-item nav-category">Clerance Management</li>
@@ -41,22 +42,11 @@
         </li>
 
         <li class="nav-item nav-category">Blotter Management</li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#blotter" aria-expanded="false" aria-controls="blotter">
-                <i class="menu-icon mdi mdi-comment-check"></i>
-                <span class="menu-title">Category</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="blotter">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('blotters.index') }}">Blotter
-                            Record</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('blotter_persons.create') }}">Add
-                            Person</a>
-                    </li>
-                </ul>
-            </div>
+        <li class="nav-item"><a class="nav-link" href="{{ route('blotters.index') }}">Blotter
+                Record</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('blotter_persons.create') }}">
+                Person to Blotter</a>
         </li>
 
         <li class="nav-item nav-category">Councilor Managment</li>
