@@ -18,9 +18,11 @@ class CreateBarangayLGUSTable extends Migration
             $table->string('firstName');
             $table->string('middleName');
             $table->string('lastName');
+            $table->string('image')->nullable();
             $table->boolean('isSecretary')->default(false);
             $table->boolean('isTreasurer')->default(false);
-            $table->enum('role', ['Captain', 'Councilors', 'Chairperson', 'Mayor']);
+            // $table->enum('role', ['Captain', 'Councilors', 'Treasurer', 'Secretary']);
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }

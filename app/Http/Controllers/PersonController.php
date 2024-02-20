@@ -70,12 +70,14 @@ class PersonController extends Controller
     {
         $resident = Resident::with('business')->find($id);
 
-        $mayor =  BarangayLGU::where('role', 'Mayor')->first();
+        // $mayor =  BarangayLGU::where('role', 'Mayor')->first();
         $captain =  BarangayLGU::where('role', 'Captain')->first();
-        $secretary =  BarangayLGU::where('role', 'Councilors')->where('isSecretary', true)->first();
-        $treasurer =  BarangayLGU::where('role', 'Councilors')->where('isTreasurer', true)->first();
+        $secretary =  BarangayLGU::where('role', 'Secretary')->where('isSecretary', false)->first();
+        $treasurer =  BarangayLGU::where('role', 'Treasurer')->where('isTreasurer', false)->first();
 
-        return view('admin.resident.show', compact('resident', 'captain', 'secretary', 'mayor', 'treasurer'));
+        // [$captain, $secretary, $treasurer] = BarangayLGU::whereIn('role', ['Captain', 'Secretary', 'Treasurer'])->get()->pluck(null, 'role');
+
+        return view('admin.resident.show', compact('resident', 'captain', 'secretary',  'treasurer'));
     }
 
     public function edit($id)

@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-{{-- {{ dd($resident) }} --}}
 @section('content')
     <div class="container">
         <div class="row">
@@ -267,6 +266,7 @@
                 var user = @json($resident);
                 var captain = @json($captain);
                 var secretary = @json($secretary);
+                console.log(secretary);
 
                 var currentDate = new Date();
                 var twoWeeksLater = new Date();
@@ -400,7 +400,6 @@
                 var user = @json($resident);
                 var captain = @json($captain);
                 var businessInfo = @json($resident->business);
-                var mayor = @json($mayor);
                 var treasurer = @json($treasurer);
                 var secretary = @json($secretary);
 

@@ -10,6 +10,8 @@ class BarangayLGU extends Model
     use HasFactory;
     protected $primaryKey = 'id';
 
+    protected $table = 'barangay_l_g_u_s';
+
     // Add other fields that you want to be mass-assignable
     protected $fillable = [
         'firstName',

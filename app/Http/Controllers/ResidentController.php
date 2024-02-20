@@ -83,14 +83,13 @@ class ResidentController extends Controller
      */
     public function show($id)
     {
-        $resident = Resident::with('business')->find($id);
-
-        $mayor =  BarangayLGU::where('role', 'Mayor')->first();
-        $captain =  BarangayLGU::where('role', 'Captain')->first();
-        $secretary =  BarangayLGU::where('role', 'Councilors')->where('isSecretary', true)->first();
-        $treasurer =  BarangayLGU::where('role', 'Councilors')->where('isTreasurer', true)->first();
-
-        return view('admin.resident.show', compact('resident', 'captain', 'secretary', 'mayor', 'treasurer'));
+        // $resident = Resident::with('business')->find($id);
+        // $captain =  BarangayLGU::where('role', 'Secretary')->first();
+        // $secretary =  BarangayLGU::where('role', 'Secretary')->where('isSecretary', false)->first();
+        // $treasurer =  BarangayLGU::where('role', 'Treasurer')->first();
+        // [$captain, $secretary, $treasurer] = BarangayLGU::whereIn('role', ['Captain', 'Secretary', 'Treasurer'])->get()->pluck(null, 'role');
+   
+        return view('admin.resident.show', compact('resident', 'captain', 'secretary',  'treasurer', ));
     }
 
     /**

@@ -14,7 +14,7 @@ class BarangayLGUController extends Controller
      */
     public function index()
     {
-        $members = BarangayLGU::where('role', '!=', 'Mayor')->get();
+        $members = BarangayLGU::all();
         return view('admin.barangay.index', compact('members'));
     }
 
@@ -25,7 +25,7 @@ class BarangayLGUController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.barangay.create');
     }
 
     /**
@@ -36,7 +36,30 @@ class BarangayLGUController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'firstName' =>'required',
+          'middleName' =>'required',
+           'lastName' =>'required',
+           'role' =>'required',
+        ]);
+
+
+        $lgu = new BarangayLGU();
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('images/con_image/',  $filename);
+            $lgu->image = $filename;
+        }
+        $lgu->firstName = $request->firstName;
+        $lgu->middleName = $request->middleName;
+        $lgu->lastName = $request->lastName;
+        $lgu->isSecretary = 0;
+        $lgu->isTreasurer = 0;
+        $lgu->role = $request->role;
+        $lgu->save();
+        return redirect()->route("baranagay_l_g_u_s.index")->with("success", "LGU Created Successfully");
     }
 
     /**
