@@ -225,7 +225,7 @@
                                 Information Management System
                             </a> from
                             Barangay Quibaol</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2023. All
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © {{ Carbon\Carbon::today()->year }}. All
                             rights reserved.</span>
                     </div>
                 </footer>

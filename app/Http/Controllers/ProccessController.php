@@ -26,8 +26,6 @@ class ProccessController extends Controller
         // Handle and process the data received from the frontend
         $data = $request->input('ownerName');
 
-        // Perform any necessary operations, e.g., save to the database
-
         // Return a response if needed
         return response()->json(['message' => 'Data processed successfully']);
     }

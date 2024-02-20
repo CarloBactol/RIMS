@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             ResidentSeeder::class,
             InformationFilingSeeder::class,
-            BlotterRecordSeeder::class,
+            // BlotterRecordSeeder::class,
             CertificateSeeder::class,
             // UserOfficerSeeder::class,
             LgusSeeder::class,

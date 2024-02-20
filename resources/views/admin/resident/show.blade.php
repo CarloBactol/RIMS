@@ -384,7 +384,7 @@
                         captain: {
                             position: 'absolute',
                             fontSize: '15',
-                            margin: [340, 48, 0, 0]
+                            margin: [335, 48, 0, 0]
                         },
                     }
 
@@ -522,7 +522,7 @@
                         captain: {
                             fontSize: fSize,
                             position: 'absolute',
-                            margin: [330, 82, 0, 0],
+                            margin: [335, 82, 0, 0],
                             color: pColor
                         },
 
@@ -658,7 +658,7 @@
                         captain: {
                             position: 'absolute',
                             fontSize: '15',
-                            margin: [340, 35, 0, 0]
+                            margin: [335, 35, 0, 0]
                         },
                     }
                 };
@@ -704,7 +704,6 @@
                     img.src = url;
                 });
             }
-
 
             // === Buttons Click ===
 

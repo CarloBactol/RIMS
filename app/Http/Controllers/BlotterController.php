@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\People;
+use App\Models\Blotter;
+use App\Models\BarangayLGU;
 use Illuminate\Http\Request;
-use App\Models\BlotterRecord;
-use App\Models\Resident;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class BlotterController extends Controller
 {
@@ -15,10 +14,26 @@ class BlotterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $blotter = BlotterRecord::with('officer')->get();
-        return view('admin.blotter.index', compact('blotter'));
+        $search = $request->query('search');
+    
+        $blotters = Blotter::query()
+            ->when($search, function ($query) use ($search) {
+                return $query->where('description', 'like', '%'.$search.'%')
+                             ->orWhereHas('respondent', function ($query) use ($search) {
+                                 $query->where('lastName', 'like', '%'.$search.'%');
+                             });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+            $isTrue = Blotter::select('respondent_id')
+            ->groupBy('respondent_id')
+            ->havingRaw('COUNT(*) >= 3')
+            ->pluck('respondent_id');
+
+        return view('admin.blotter.index', compact('blotters', 'search', 'isTrue' ));
     }
 
     /**
@@ -28,8 +43,8 @@ class BlotterController extends Controller
      */
     public function create()
     {
-        $resident = Resident::all();
-        return view('admin.blotter.create', compact('resident'));
+        $people = People::all();
+        return view('admin.blotter.create', compact("people"));
     }
 
     /**
@@ -38,20 +53,14 @@ class BlotterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Blotter $blotter)
     {
-        $this->validate($request, [
-            'residentID' => "required",
-            'description' => "required|min:10|max:200",
-        ]);
-
-        $bRecord = new BlotterRecord();
-        $bRecord->residentID = $request->get('residentID');
-        $bRecord->description = $request->get('description');
-        $bRecord->date = Carbon::now();
-        $bRecord->officerID = Auth::user()->id;
-        $bRecord->save();
-        return redirect()->route('blotters.index')->with('success', 'Successfully saved.');
+        $this->validate($request, ["complainant_id" => "required",
+                                                    "respondent_id" => "required", 
+                                                    "description" => "required|string|min:10"
+                                                    ]);
+        $blotter->create($request->all());
+        return redirect()->route("blotters.index")->with("success", "Blotter Created Successfully!");    
     }
 
     /**
@@ -62,7 +71,12 @@ class BlotterController extends Controller
      */
     public function show($id)
     {
-        //
+        $blotters = Blotter::find($id);
+        $captain =  BarangayLGU::where('role', 'Captain')->first();
+        $secretary =  BarangayLGU::where('role', 'Councilors')->where('isSecretary', true)->first();
+        $treasurer =  BarangayLGU::where('role', 'Councilors')->where('isTreasurer', true)->first();
+
+    return view('admin.blotter.show', compact('blotters',  'captain', 'secretary', 'treasurer'));
     }
 
     /**
@@ -73,9 +87,9 @@ class BlotterController extends Controller
      */
     public function edit($id)
     {
-        $blotter = BlotterRecord::findOrFail($id);
-        $resident = Resident::all();
-        return view('admin.blotter.edit', compact('resident', 'blotter'));
+        $blotters = Blotter::find($id);
+        $people = People::all();
+        return view('admin.blotter.edit', compact("blotters", "people"));
     }
 
     /**
@@ -87,17 +101,14 @@ class BlotterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            // 'residentID' => "required",
-            'description' => "required|min:10|max:200",
+        $this->validate($request, ["complainant_id" => "required",
+        "respondent_id" => "required", 
+        "description" => "required|string|min:10"
         ]);
 
-        $bRecord = BlotterRecord::findOrFail($id);
-        $bRecord->description = $request->get('description');
-        $bRecord->date = Carbon::now();
-        $bRecord->officerID = Auth::user()->id;
-        $bRecord->save();
-        return redirect()->route('blotters.index')->with('info', 'Successfully update.');
+       $blotters = Blotter::find($id);
+         $blotters->update($request->all());      
+         return redirect()->route("blotters.index")->with("info", "Blotter Updated Successfully!");     
     }
 
     /**
@@ -108,8 +119,8 @@ class BlotterController extends Controller
      */
     public function destroy($id)
     {
-        $bRecord = BlotterRecord::findOrFail($id);
-        $bRecord->delete();
-        return redirect()->route('blotters.index')->with("danger", "Blotter deleted successfully.");
+        $delete = Blotter::findorFail($id);
+        $delete->delete();
+        return redirect()->back()->with('danger', 'Blotter Deleted Successfully!');
     }
 }

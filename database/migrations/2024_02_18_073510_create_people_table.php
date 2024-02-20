@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermitSeriesTable extends Migration
+class CreatePeopleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreatePermitSeriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('permit_series', function (Blueprint $table) {
+        Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->string('permitNo');
-            $table->string('userID');
+            $table->string("firstName");
+            $table->string("middleName");
+            $table->string("lastName");
+            $table->string("address");
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreatePermitSeriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permit_series');
+        Schema::dropIfExists('people');
     }
 }

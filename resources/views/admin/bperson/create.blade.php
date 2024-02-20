@@ -8,11 +8,11 @@
                     <div class="d-flex justify-content-between">
                         <h4>Create Person</h4>
                         {{-- <a href="{{ route('admin.owners.index') }}" class="btn btn-md btn-info">Back</a> --}}
-                        <a href="{{ route('blotters.index') }}" class="btn btn-inverse-primary btn-rounded btn-icon">
+                        <a href="{{ route('Createblotters.index') }}" class="btn btn-inverse-primary btn-rounded btn-icon">
                             <i class="ti-arrow-left"></i>
                         </a>
                     </div>
-                    <form class="forms-sample" action="{{ route('blotter_persons.store') }}" method="post"
+                    <form class="forms-sample" action="{{ route('Createblotters.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
-                        <a href="{{ route('blotter_persons.index') }}" class="btn btn-light">Cancel</a>
+                        <a href="{{ route('Createblotters.index') }}" class="btn btn-light">Cancel</a>
 
                     </form>
                 </div>

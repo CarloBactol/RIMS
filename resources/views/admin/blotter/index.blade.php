@@ -1,47 +1,54 @@
 @extends('layouts.admin')
 @section('content')
-
 <div class="container-fluid">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
                     <h4 class="card-title">Blotter Records</h4>
-                    <a title="new" href="{{ route('blotters.create') }}" class="btn btn-sm btn-info py-2 mb-2">Add
-                        Blotter
-                    </a>
+                    <div>
+                        <form action="{{ route('blotters.index') }}" method="GET">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Search Name" name="search" value="{{ $search }}">&nbsp;
+                                <div class="input-group-append ">
+                                    <button class="btn btn-sm btn-info py-2 mb-2" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <a title="new" href="{{ route('blotters.create') }}" class="btn btn-sm btn-info py-2 mb-2">Add
+                            Blotter
+                        </a>
+                    </div>
+                   
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover" id="myTable">
+                    
+                    <table class="table table-hover" id="">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Respondent Name</th>
+                                <th>Complainant Name</th>
                                 <th>Description</th>
-                                <th>Date</th>
-                                <th>Encoded By</th>
+                                <th>Date Created</th>
                                 <th>Action</th>
                             </tr>
-                        </thead>
+                        </thead>    
                         <tbody>
-                            @foreach ($blotter as $item)
+                            @foreach ($blotters as $item)
                             <tr>
-                                <td>{{ Str::upper($item->resident->firstName). " ".
-                                    Str::upper($item->resident->lastName)}}</td>
-                                <td>{!! Str::limit($item->description, 50, '...') !!}</td>
-                                <td>{{ $item->date }}</td>
-                                <td>{{ $item->officer->name }}</td>
+                                <td>{{ $item->respondent->firstName.' '. $item->respondent->middleName.' '. $item->respondent->lastName }}</td>
+                                <td>{{ $item->complainant->firstName.' '. $item->complainant->middleName.' '. $item->complainant->lastName }}</td>
+                                <td>{{ Str::limit( $item->description, 40, 'See more...') }}</td>
+                                {{-- <td>{{ $item->created_at->formatLocalized('%A, %d %B %Y | %H:%m') }}</td> --}}
+                                <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a href="{{ route('blotters.edit', $item->id) }}"
                                         class="btn btn-info py-1 btn-icon float-start me-2">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- <form method="post" action="{{ route('blotters.destroy', $item->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger py-1 btn-icon">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form> --}}
+
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal{{ $item->id }}">
@@ -75,24 +82,38 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @if ($isTrue->contains($item->respondent->id))
+                                    <a href="{{ route('blotters.show', $item->id) }}"
+                                        class="btn btn-primary py-1 btn-icon float-start me-2">
+                                        <i class="fas fa-file"></i>
+                                    </a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
+                      
                     </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item {{ $blotters->previousPageUrl() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $blotters->previousPageUrl() }}">Previous</a>
+                            </li>
+                            @foreach ($blotters->getUrlRange(1, $blotters->lastPage()) as $page => $url)
+                                <li class="page-item {{ $blotters->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
+                            <li class="page-item {{ $blotters->nextPageUrl() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $blotters->nextPageUrl() }}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-@endsection
-@section('scripts')
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready( function () {
-        $('#myTable').DataTable();
-        $(".alert").show("slow").delay(3000).hide("slow");
-    } );
-</script>
 @endsection

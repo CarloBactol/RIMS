@@ -7,79 +7,59 @@
             </a>
         </li>
 
-        <li class="nav-item nav-category">Resident Management</li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('persons.index') }}">
+                <i class="mdi menu-icon mdi-account-multiple-plus-outline"></i>
+                <span class="menu-title">Residents</span>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('business_permits.index') }}">
+                <i class="mdi menu-icon mdi mdi-comment-check"></i>
+                <span class="menu-title">Business Permit</span>
+            </a>
+        </li>
+
         {{-- <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#services" aria-expanded="false"
-                aria-controls="services">
-                <i class="menu-icon mdi mdi-account-multiple-plus-outline"></i>
-                <span class="menu-title">Category</span>
-                <i class="menu-arrow"></i>
+            <a class="nav-link" href="{{ route('blotters.index') }}">
+                <i class="mdi menu-icon mdi mdi-comment-check"></i>
+                <span class="menu-title">Blotter</span>
             </a>
-            <div class="collapse" id="services">
-                <ul class="nav flex-column sub-menu">
-
-                </ul>
-            </div>
         </li> --}}
-        <li class="nav-item"><a class="nav-link" href="{{ route('persons.index') }}">Residents</a>
-        </li>
-
-        <li class="nav-item nav-category">Clerance Management</li>
+{{-- 
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#clearance" aria-expanded="false"
-                aria-controls="clearance">
-                <i class="menu-icon mdi mdi-comment-check"></i>
-                <span class="menu-title">Category</span>
-                <i class="menu-arrow"></i>
+            <a class="nav-link" href="{{ route('Createblotters.store') }}">
+                <i class="mdi menu-icon mdi mdi-comment-check"></i>
+                <span class="menu-title">Blotter Person</span>
             </a>
-            <div class="collapse" id="clearance">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('business_permits.index') }}">Business
-                            Permit</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="nav-item nav-category">Blotter Management</li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('blotters.index') }}">Blotter
-                Record</a>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('blotter_persons.create') }}">
-                Person to Blotter</a>
-        </li>
-
-        <li class="nav-item nav-category">Councilor Managment</li>
+        </li> --}}
+   
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#lgus" aria-expanded="false" aria-controls="lgus">
+            <a class="nav-link" href="{{ route('baranagay_l_g_u_s.index') }}">
+                <i class="mdi menu-icon mdi mdi-comment-check"></i>
+                <span class="menu-title">Councilor</span>
+            </a>
+        </li>
+
+        <li class="nav-item nav-category">Blotter Record</li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#blotter" aria-expanded="false" aria-controls="blotter">
                 <i class="menu-icon mdi mdi-account-multiple"></i>
                 <span class="menu-title">Category</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="lgus">
+            <div class="collapse" id="blotter">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('baranagay_l_g_u_s.index') }}">Councilor
+                    <li class="nav-item"><a class="nav-link" href="{{ route('blotters.index') }}">Blotter
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('people.index') }}">Person
                         </a>
                     </li>
                 </ul>
             </div>
         </li>
-
-        {{-- <li class="nav-item nav-category">Login Tracking</li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#track" aria-expanded="false" aria-controls="track">
-                <i class="menu-icon mdi mdi-account-multiple"></i>
-                <span class="menu-title">Category</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="track">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('trackings.index') }}">Activity
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li> --}}
 
         <li class="nav-item nav-category">Account Center</li>
         <li class="nav-item">

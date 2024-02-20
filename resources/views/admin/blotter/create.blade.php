@@ -16,31 +16,46 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-
-                            <label for="fname">Person Name</label>
-                            <select name="residentID" id=""
-                                class="form-control @error('residentID') is-invalid @enderror">
-                                @foreach ($resident as $item)
+                            <label for="fname">Complainant Name</label>
+                            <select name="complainant_id" id=""
+                                class="form-control @error('complainant_id') is-invalid @enderror">
+                                <option selected value="" disabled>Select Complainant</option>
+                            
+                                @foreach ($people as $item)
                                 <option value="{{$item->id}}"
-                                    class="form-control {{ $item->isBlotter == '1' ? 'text-danger' : '' }}">
-                                    {{Str::upper($item->lastName) . ", "
+                                    class="form-control">
+                                    {{Str::upper($item->lastName) . ", " . Str::upper($item->middleName) . " "
                                     . Str::upper($item->firstName)}} </option>
                                 @endforeach
                             </select>
-                            {{-- <input type="text" id="dataInput" onchange="sendData()"
-                                class="form-control  @error('firstName') is-invalid @enderror" name="firstName"
-                                value="{{ old('firstName') }}" id="fname" placeholder="firstName"> --}}
-                            @error('residentID')
+                            @error('complainant_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="fname">Respondent Name</label>
+                            <select name="respondent_id" id=""
+                                class="form-control @error('respondent_id') is-invalid @enderror">
+                                <option selected value="" disabled>Select Respondent</option>
+                                @foreach ($people as $item)
+                                <option value="{{$item->id}}"
+                                    class="form-control">
+                                    {{Str::upper($item->lastName) . ", " . Str::upper($item->middleName) . " "
+                                    . Str::upper($item->firstName)}} </option>
+                                @endforeach
+                            </select>
+                            @error('respondent_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
                         <div class="form-group">
                             <label for="description">Description</label>
-                            {{-- <input type="text" class="form-control @error('description') is-invalid @enderror"
-                                name="description" value="{{ old('description') }}" id="description"
-                                placeholder="description"> --}}
                             <textarea name="description" class="form-control @error('description') is-invalid @enderror"
                                 id="" cols="30" rows="10">{{ old('description') }}
                             </textarea>
