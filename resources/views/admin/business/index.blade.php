@@ -16,7 +16,6 @@
                                     <th>Owner Name</th>
                                     <th>Business Name</th>
                                     <th>Business Address</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -27,9 +26,9 @@
                                         </td>
                                         <td>{{ Str::ucfirst($item->businessName) }}</td>
                                         <td>{{ Str::ucfirst($item->businessAddress) }}</td>
-                                        <td><label
+                                        {{-- <td><label
                                                 class=" {{ $item->resident->status == '1' ? 'text-success' : 'text-danger' }}">{{ $item->resident->status == '1' ? 'Active' : 'Inactive' }}</label>
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             <a href="{{ route('business_permits.edit', $item->id) }}"
                                                 class="btn btn-info py-1 btn-icon float-start me-2">

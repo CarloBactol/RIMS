@@ -26,6 +26,7 @@ class PersonController extends Controller
     {
         $this->validate($request, [
             'firstName' => 'required|min:2',
+            'middleName' => 'required|min:2',
             'lastName' => 'required|min:2',
             'address' => 'required',
             'dateOfBirth' => ['required', 'date'],
@@ -45,6 +46,7 @@ class PersonController extends Controller
         $dateBirth = Carbon::parse($request->birthdate);
         Resident::create([
             'firstName' => $request->firstName,
+            'middleName' => $request->middleName,
             'lastName' => $request->lastName,
             'civilStatus' => $request->civilStatus,
             'nationality' => $request->nationality,
@@ -54,7 +56,6 @@ class PersonController extends Controller
             'contactNumber' => $request->contactNumber,
             'gender' => $request->gender,
             'purpose' => $request->purpose,
-            'status' => $request->status == '' ? 0 : 1,
         ]);
 
         return redirect()->route('persons.index')->with('success', 'Successfully saved.');
@@ -90,6 +91,7 @@ class PersonController extends Controller
     {
         $this->validate($request, [
             'firstName' => 'required|min:2',
+            'middleName' => 'required|min:2',
             'lastName' => 'required|min:2',
             'address' => 'required',
             'dateOfBirth' => 'required',
@@ -102,6 +104,7 @@ class PersonController extends Controller
         $dateBirth = Carbon::parse($request->birthdate);
         $update = Resident::find($id);
         $update->firstName = $request->firstName;
+        $update->middleName = $request->middleName;
         $update->lastName = $request->lastName;
         $update->address = $request->address;
         $update->dateOfBirth = $request->dateOfBirth;
@@ -111,7 +114,6 @@ class PersonController extends Controller
         $update->contactNumber = $request->contactNumber;
         $update->gender = $request->gender;
         $update->purpose = $request->purpose;
-        $update->status = $request->status == '' ? 0 : 1;
         $update->save();
 
         return redirect()->route('persons.index')->with('info', 'Successfully updated.');

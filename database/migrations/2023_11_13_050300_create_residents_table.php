@@ -16,6 +16,7 @@ class CreateResidentsTable extends Migration
         Schema::create('residents', function (Blueprint $table) {
             $table->id();
             $table->string('firstName');
+            $table->string('middleName')->nullable();;
             $table->string('lastName');
             $table->string('civilStatus')->nullable();
             $table->string('nationality')->nullable();
@@ -27,7 +28,6 @@ class CreateResidentsTable extends Migration
             $table->string('barangay')->default('Quibaol');
             $table->string('purpose')->nullable();
             $table->boolean('isBlotter')->default(false);
-            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

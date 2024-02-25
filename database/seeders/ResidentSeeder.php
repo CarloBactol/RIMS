@@ -16,6 +16,7 @@ class ResidentSeeder extends Seeder
     {
         Resident::create([
             'firstName' => 'John',
+            'middleName' => 'Cruz',
             'lastName' => 'Doe',
             'nationality' => 'Filipino',
             'civilStatus' => 'Single',
@@ -29,6 +30,7 @@ class ResidentSeeder extends Seeder
         ]);
         Resident::create([
             'firstName' => 'Kat',
+            'middleName' => 'Yao',
             'lastName' => 'Neri',
             'nationality' => 'Filipino',
             'civilStatus' => 'Single',

@@ -72,6 +72,14 @@
 
     <script>
         $(document).ready(function() {
+
+
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
+
             // ... Your existing document ready code
             $('#myList a').on('click', function(e) {
                 e.preventDefault()
@@ -126,6 +134,7 @@
                 });
 
                 let pColor = '#4b4b4b';
+                let fSize = "15";
 
                 // BC
                 var documentDefinition = {
@@ -145,7 +154,7 @@
                             color: pColor,
                         },
                         {
-                            text: `${user.firstName} ${user.lastName}`,
+                            text: `${user.firstName} ${user.middleName} ${user.lastName}`,
                             style: 'name',
                             color: pColor,
                         },
@@ -155,7 +164,7 @@
                             color: pColor,
                         },
                         {
-                            text: `${user.firstName} ${user.lastName}`,
+                            text: `${user.firstName} ${user.middleName} ${user.lastName}`,
                             style: 'name2',
                             color: pColor,
                         },
@@ -180,12 +189,12 @@
                             color: pColor,
                         },
                         {
-                            text: `${user.firstName} ${user.lastName}`,
+                            text: `${user.firstName} ${user.middleName} ${user.lastName}`,
                             style: 'name3',
                             color: pColor,
                         },
                         {
-                            text: `${captain.firstName} ${captain.lastName}`,
+                            text: `${captain.firstName} ${captain.middleName} ${captain.lastName}`,
                             style: 'captain',
                             color: pColor,
                         },
@@ -207,7 +216,7 @@
                         },
                         name: {
                             position: 'absolute',
-                            fontSize: '13',
+                            fontSize: '15',
                             margin: [300, 72, 0, 0]
                         },
                         age: {
@@ -242,13 +251,13 @@
                         },
                         name3: {
                             position: 'absolute',
-                            fontSize: '13',
-                            margin: [40, 46, 0, 0]
+                            fontSize: '15',
+                            margin: [40, 42, 0, 0]
                         },
                         captain: {
                             position: 'absolute',
                             fontSize: '15',
-                            margin: [340, 27, 0, 0]
+                            margin: [310, 27, 0, 0]
                         },
                         footer: {
                             alignment: 'bottom',
@@ -305,6 +314,7 @@
                 });
 
                 let pColor = '#4b4b4b';
+                let fontSize = '15';
 
                 // CR
                 var documentDefinition = {
@@ -315,7 +325,7 @@
                     },
 
                     content: [{
-                            text: `${user.firstName} ${user.lastName}`,
+                            text: `${user.firstName} ${user.middleName} ${user.lastName}`,
                             style: 'name',
                             color: pColor,
                         },
@@ -340,12 +350,12 @@
                             color: pColor,
                         },
                         {
-                            text: `${secretary.firstName} ${secretary.lastName}`,
+                            text: `${secretary.firstName} ${secretary.middleName} ${secretary.lastName}`,
                             style: 'secretary',
                             color: pColor,
                         },
                         {
-                            text: `${captain.firstName} ${captain.lastName}`,
+                            text: `${captain.firstName} ${captain.middleName} ${captain.lastName}`,
                             style: 'captain',
                             color: pColor,
                         },
@@ -353,38 +363,38 @@
                     styles: {
                         name: {
                             position: 'absolute',
-                            fontSize: '13',
-                            margin: [320, 240, 0, 0]
+                            fontSize: fontSize,
+                            margin: [280, 237, 0, 0]
                         },
                         age: {
                             position: 'absolute',
-                            fontSize: '13',
-                            margin: [35, 12, 0, 0]
+                            fontSize: fontSize,
+                            margin: [40, 11, 0, 0]
                         },
                         days: {
                             position: 'absolute',
-                            fontSize: '13',
-                            margin: [150, 108, 0, 0]
+                            fontSize: fontSize,
+                            margin: [149, 106, 0, 0]
                         },
                         month: {
                             position: 'absolute',
-                            fontSize: '13',
-                            margin: [250, -15, 0, 0]
+                            fontSize: fontSize,
+                            margin: [250, -20, 0, 0]
                         },
                         year: {
                             position: 'absolute',
-                            fontSize: '13',
-                            margin: [370, -15, 0, 0]
+                            fontSize: fontSize,
+                            margin: [365, -16, 0, 0]
                         },
                         secretary: {
                             position: 'absolute',
-                            fontSize: '15',
-                            margin: [70, 135, 0, 0]
+                            fontSize: fontSize,
+                            margin: [30, 135, 0, 0]
                         },
                         captain: {
                             position: 'absolute',
-                            fontSize: '15',
-                            margin: [335, 48, 0, 0]
+                            fontSize: fontSize,
+                            margin: [280, 48, 0, 0]
                         },
                     }
 
@@ -465,19 +475,19 @@
                             style: 'expiration'
                         },
                         {
-                            text: `${user.firstName} ${user.lastName}`,
+                            text: `${user.firstName} ${user.middleName} ${user.lastName}`,
                             style: 'name2'
                         },
                         {
-                            text: `${treasurer.firstName} ${treasurer.lastName}`,
+                            text: `${treasurer.firstName} ${treasurer.middleName} ${treasurer.lastName}`,
                             style: 'treasurer'
                         },
                         {
-                            text: `${secretary.firstName} ${secretary.lastName}`,
+                            text: `${secretary.firstName}  ${secretary.middleName} ${secretary.lastName}`,
                             style: 'secretary'
                         },
                         {
-                            text: `${captain.firstName} ${captain.lastName}`,
+                            text: `${captain.firstName} ${captain.middleName} ${captain.lastName}`,
                             style: 'captain'
                         },
                     ],
@@ -576,7 +586,7 @@
                 });
 
                 let pColor = '#4b4b4b';
-                let fSize = '15';
+                let fSize = "15";
 
                 // Indigency Certificate
                 var documentDefinition = {
@@ -587,7 +597,7 @@
                     },
 
                     content: [{
-                            text: `${user.firstName} ${user.lastName}`,
+                            text: `${user.firstName} ${user.middleName} ${user.lastName}`,
                             style: 'name'
                         },
                         {
@@ -607,12 +617,12 @@
                             style: 'year'
                         },
                         {
-                            text: `${secretary.firstName} ${secretary.lastName}`,
+                            text: `${secretary.firstName} ${secretary.middleName} ${secretary.lastName}`,
                             style: 'secretary',
                             color: pColor,
                         },
                         {
-                            text: `${captain.firstName} ${captain.lastName}`,
+                            text: `${captain.firstName} ${captain.middleName} ${captain.lastName}`,
                             style: 'captain',
                             color: pColor,
                         },
@@ -652,12 +662,12 @@
                         secretary: {
                             position: 'absolute',
                             fontSize: '15',
-                            margin: [70, 120, 0, 0]
+                            margin: [30, 120, 0, 0]
                         },
                         captain: {
                             position: 'absolute',
                             fontSize: '15',
-                            margin: [335, 35, 0, 0]
+                            margin: [280, 35, 0, 0]
                         },
                     }
                 };
@@ -706,25 +716,79 @@
 
             // === Buttons Click ===
 
+
             $('#bcPDF').click(function(e) {
                 e.preventDefault();
-                generatePDFBarangayClearance();
+                var user = @json($resident);
+                if (confirm("Are you sure you want to generate a certificate?")) {
+                    // Code to delete the item goes here
+                    console.log("Item deleted!");
+                    PostLogs(`${user.id}`, "Barangay Clearance")
+                    generatePDFBarangayClearance();
+                } else {
+                    console.log("Deletion canceled.");
+                }
+
+                
             });
 
             $('#crPDF').click(function(e) {
                 e.preventDefault();
-                generatePDFCerticateResidency();
+                var user = @json($resident);
+                if (confirm("Are you sure you want to generate a certificate?")) {
+                    // Code to delete the item goes here
+                    console.log("Item deleted!");
+                    PostLogs(`${user.id}`, "Certicate Residency")
+                    generatePDFCerticateResidency();
+                } else {
+                    console.log("Deletion canceled.");
+                }
+                
             });
 
             $('#businessPermitPDF').click(function(e) {
                 e.preventDefault();
-                generatePDFBusinessPermit();
+                var user = @json($resident);
+                if (confirm("Are you sure you want to generate a certificate?")) {
+                    // Code to delete the item goes here
+                    console.log("Item deleted!");
+                    PostLogs(`${user.id}`, "Permit to Operate");
+                    generatePDFBusinessPermit();
+                } else {
+                    console.log("Deletion canceled.");
+                }
+                
             });
 
             $('#indigencyPDF').click(function(e) {
                 e.preventDefault();
-                generatePDFIndigency();
+                var user = @json($resident);
+                if (confirm("Are you sure you want to generate a certificate?")) {
+                    // Code to delete the item goes here
+                    console.log("Item deleted!");
+                    PostLogs(`${user.id}`, "Certifacte Indigency");
+                    generatePDFIndigency();
+                } else {
+                    console.log("Deletion canceled.");
+                }
+                
             });
+
+
+           function PostLogs(userId, certType){
+          
+             console.log(userId);
+            $.ajax({
+                type: "POST",
+                url: "{{ route('cert_logs.store') }}",
+                data: {user_id: userId, certType: certType},
+                success: function (response) {
+                    console.log(response.success);
+                },
+             
+            });
+           }
+
         });
     </script>
 @endsection

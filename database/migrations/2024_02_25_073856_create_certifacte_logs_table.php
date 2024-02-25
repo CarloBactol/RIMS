@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInformationFilingsTable extends Migration
+class CreateCertifacteLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateInformationFilingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('information_filings', function (Blueprint $table) {
+        Schema::create('certifacte_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('residentID');
             $table->foreign('residentID')->references('id')->on('residents')->onDelete('cascade')->onUpdate('cascade');
-            $table->date('filingDate');
-            $table->string('filingType');
-            $table->text('description');
-            $table->unsignedBigInteger('officerID')->nullable();
-            
+            $table->string("certificate_type");
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ class CreateInformationFilingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('information_filings');
+        Schema::dropIfExists('certifacte_logs');
     }
 }

@@ -41,6 +41,7 @@ class ResidentController extends Controller
     {
         $this->validate($request, [
             'firstName' => 'required|min:2',
+            'middleName' => 'required|min:2',
             'lastName' => 'required|min:2',
             'address' => 'required',
             'dateOfBirth' => ['required', 'date'],
@@ -60,6 +61,7 @@ class ResidentController extends Controller
         $dateBirth = Carbon::parse($request->birthdate);
         Resident::create([
             'firstName' => $request->firstName,
+            'middleName' => $request->middleName,
             'lastName' => $request->lastName,
             'civilStatus' => $request->civilStatus,
             'nationality' => $request->nationality,

@@ -2,7 +2,7 @@
 @section('css-custom')
 <style>
     body {
-        background-color: #f8f9fa;
+        background-image: {{ asset("images/captain.jpg") }}
     }
 
     .jumbotron {

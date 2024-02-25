@@ -1,5 +1,18 @@
 @extends('layouts.app')
 
+@section("css-custom")
+<style>
+    .card{
+        background-color: rgba(255, 255, 255, 0.4) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        backdrop-filter: blur(5px) !important;
+        padding: 20px !important;
+        margin: 30px !important;
+        font-weight: bold !important;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

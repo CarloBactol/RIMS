@@ -14,7 +14,7 @@ class BarangayLGUController extends Controller
      */
     public function index()
     {
-        $members = BarangayLGU::all();
+        $members = BarangayLGU::orderBy("role", "ASC")->get();;
         return view('admin.barangay.index', compact('members'));
     }
 
@@ -39,8 +39,12 @@ class BarangayLGUController extends Controller
         $this->validate($request, [
             'firstName' =>'required',
           'middleName' =>'required',
-           'lastName' =>'required',
+          'lastName' =>'required',
+          'address' =>'required',
+           'contactNo' =>'required|digits:11|unique:barangay_l_g_u_s',
+           'schedule' =>'required',
            'role' =>'required',
+           'image' => 'nullable|image|mimes:jpeg,jpg,png,gif',
         ]);
 
 
@@ -55,6 +59,9 @@ class BarangayLGUController extends Controller
         $lgu->firstName = $request->firstName;
         $lgu->middleName = $request->middleName;
         $lgu->lastName = $request->lastName;
+        $lgu->address = $request->address;
+        $lgu->contactNo = $request->contactNo;
+        $lgu->schedule = $request->schedule;
         $lgu->isSecretary = 0;
         $lgu->isTreasurer = 0;
         $lgu->role = $request->role;
@@ -81,7 +88,8 @@ class BarangayLGUController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lgus = BarangayLGU::find($id);
+        return view('admin.barangay.edit', compact("lgus"));
     }
 
     /**
@@ -93,7 +101,37 @@ class BarangayLGUController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'firstName' =>'required',
+          'middleName' =>'required',
+          'lastName' =>'required',
+          'address' =>'required',
+           'contactNo' =>'required|digits:11|unique:barangay_l_g_u_s,contactNo,' .$id,
+           'schedule' =>'required',
+           'role' =>'required',
+           'image' => 'nullable|image|mimes:jpeg,jpg,png,gif',
+        ]);
+
+
+        $lgu =  BarangayLGU::find($id);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('images/con_image/',  $filename);
+            $lgu->image = $filename;
+        }
+        $lgu->firstName = $request->firstName;
+        $lgu->middleName = $request->middleName;
+        $lgu->lastName = $request->lastName;
+        $lgu->address = $request->address;
+        $lgu->contactNo = $request->contactNo;
+        $lgu->schedule = $request->schedule;
+        $lgu->isSecretary = 0;
+        $lgu->isTreasurer = 0;
+        $lgu->role = $request->role;
+        $lgu->save();
+        return redirect()->route("baranagay_l_g_u_s.index")->with("success", "LGU Created Successfully");
     }
 
     /**
@@ -104,6 +142,8 @@ class BarangayLGUController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = BarangayLGU::findorFail($id);
+        $delete->delete();
+        return redirect()->back()->with('danger', 'Blotter Deleted Successfully!');
     }
 }

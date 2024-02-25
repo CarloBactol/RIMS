@@ -106,12 +106,12 @@
                                 style: 'comAddress'
                             },
                             {
-                                text: `${ blotters.respondent.firstName } ${ blotters.respondent.lastName}`,
+                                text: `${ blotters.respondent.firstName } ${ blotters.respondent.middleName.substr(0,1) }. ${ blotters.respondent.lastName}`,
                                 style: 'respondent'
                             },
                             {
-                                text: calculateAge(user.dateOfBirth),
-                                style: 'age'
+                                text: `${ blotters.respondent.address }`,
+                                style: 'resAddress'
                             },
                             {
                                 text: days,
@@ -126,12 +126,12 @@
                                 style: 'year'
                             },
                             {
-                                text: `${secretary.firstName} ${secretary.lastName}`,
+                                text: `${secretary.firstName} ${secretary.middleName.substr(0,1)}. ${secretary.lastName}`,
                                 style: 'secretary',
                                 color: pColor,
                             },
                             {
-                                text: `${captain.firstName} ${captain.lastName}`,
+                                text: `${captain.firstName} ${secretary.middleName.substr(0,1)}. ${captain.lastName}`,
                                 style: 'captain',
                                 color: pColor,
                             },
@@ -142,59 +142,54 @@
                                 position: 'absolute',
                                 fontSize: fSize,
                                 color: pColor,
-                                margin: [30, 150, 0, 0]
+                                margin: [50, 150, 0, 0]
                             },
                             comAddress: {
                                 position: 'absolute',
-                                fontSize: 10,
+                                fontSize: 14,
                                 color: pColor,
-                                margin: [30, 7, 0, 0]
+                                margin: [30, 5, 0, 0]
                             },
                             respondent: {
                                 position: 'absolute',
                                 fontSize: fSize,
                                 color: pColor,
-                                margin: [300, 296, 0, 0]
+                                margin: [50, 60, 0, 0]
                             },
-                            name: {
+                            resAddress: {
                                 position: 'absolute',
-                                fontSize: fSize,
+                                fontSize: 14,
                                 color: pColor,
-                                margin: [300, 296, 0, 0]
+                                margin: [30, 4, 0, 0]
                             },
-                            age: {
-                                position: 'absolute',
-                                fontSize: fSize,
-                                color: pColor,
-                                margin: [40, 4, 0, 0]
-                            },
+                            
                             days: {
                                 position: 'absolute',
                                 fontSize: fSize,
                                 color: pColor,
-                                margin: [160, 125, 0, 0]
+                                margin: [140, 285, 0, 0]
                             },
                             month: {
                                 position: 'absolute',
                                 fontSize: fSize,
                                 color: pColor,
-                                margin: [300, -15, 0, 0]
+                                margin: [235, -19, 0, 0]
                             },
                             year: {
                                 position: 'absolute',
                                 fontSize: fSize,
                                 color: pColor,
-                                margin: [440, -17, 0, 0]
+                                margin: [340, -15, 0, 0]
                             },
                             secretary: {
                                 position: 'absolute',
-                                fontSize: '15',
-                                margin: [70, 120, 0, 0]
+                                fontSize: 15,
+                                margin: [335, 26, 0, 0]
                             },
                             captain: {
                                 position: 'absolute',
-                                fontSize: '15',
-                                margin: [335, 35, 0, 0]
+                                fontSize: 15,
+                                margin: [70, 60, 0, 0]
                             },
                         }
                     };

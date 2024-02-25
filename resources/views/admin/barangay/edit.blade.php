@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-lg-8 " style="margin: 0 auto;">
@@ -12,9 +13,10 @@
                             <i class="ti-arrow-left"></i>
                         </a>
                     </div>
-                    <form class="forms-sample" action="{{ route('baranagay_l_g_u_s.store') }}" method="post"
+                    <form class="forms-sample" action="{{ route('baranagay_l_g_u_s.update', $lgus->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
+                        @method("PUT")
                      
                         <div class="row">
                             <div class="col-md-4">
@@ -22,7 +24,7 @@
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
                                         <input type="text" class="form-control @error('firstName') is-invalid @enderror"
-                                            name="firstName" value="{{ old('firstName') }}" id="firstName" placeholder="First Name">
+                                            name="firstName" value="{{ $lgus->firstName }}" id="firstName" placeholder="First Name">
                                         @error('firstName')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -41,7 +43,7 @@
                                     <div class="form-group">
                                         <label for="middleName">Miidle Name</label>
                                         <input type="text" class="form-control @error('middleName') is-invalid @enderror"
-                                            name="middleName" value="{{ old('middleName') }}" id="middleName" placeholder="Middle Name">
+                                            name="middleName" value="{{ $lgus->middleName }}" id="middleName" placeholder="Middle Name">
                                         @error('middleName')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -60,7 +62,7 @@
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
                                         <input type="text" class="form-control @error('lastName') is-invalid @enderror"
-                                            name="lastName" value="{{ old('lastName') }}" id="lastName" placeholder="Last Name">
+                                            name="lastName" value="{{ $lgus->lastName }}" id="lastName" placeholder="Last Name">
                                         @error('lastName')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -82,7 +84,7 @@
                                     <div class="form-group">
                                         <label for="address">Address</label>
                                         <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                            name="address" value="{{ old('address') }}" id="address" placeholder="First Name">
+                                            name="address" value="{{ $lgus->address }}" id="address" placeholder="First Name">
                                         @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -101,7 +103,7 @@
                                     <div class="form-group">
                                         <label for="contactNo">Contact No.</label>
                                         <input type="text" class="form-control @error('contactNo') is-invalid @enderror"
-                                            name="contactNo" value="{{ old('contactNo') }}" id="contactNo" placeholder="Contact No.">
+                                            name="contactNo" value="{{ $lgus->contactNo }}" id="contactNo" placeholder="Contact No.">
                                         @error('contactNo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -123,14 +125,13 @@
                                         <select name="schedule" id=""
                                         class="form-control @error('schedule') is-invalid @enderror">
                                         <option selected value="" disabled>Select Schedule</option>
-                                        <option value="ANYTIME"  @if (old('schedule') == 'ANYTIME') selected="selected" @endif>ANYTIME</option>
-                                        <option value="MONDAY" @if (old('schedule') == 'MONDAY') selected="selected" @endif>MONDAY</option>
-                                        <option value="TUESDAY" @if (old('schedule') == 'TUESDAY') selected="selected" @endif>TUESDAY</option>
-                                        <option value="WEDNESDAY" @if (old('schedule') == 'WEDNESDAY') selected="selected" @endif>WEDNESDAY</option>
-                                        <option value="THURSDAY" @if (old('schedule') == 'THURSDAY') selected="selected" @endif>THURSDAY</option>
-                                        <option value="FRIDAY" @if (old('schedule') == 'FRIDAY') selected="selected" @endif>FRIDAY</option>
-                                        <option value="SUTURDAY" @if (old('schedule') == 'SUTURDAY') selected="selected" @endif>SUTURDAY</option>
-                                        <option value="SUNDAY" @if (old('schedule') == 'SUNDAY') selected="selected" @endif>SUNDAY</option>
+                                        <option value="MONDAY" {{ $lgus->schedule == "MONDAY" ? 'selected' : '' }}>MONDAY</option>
+                                        <option value="TUESDAY" {{ $lgus->schedule == "TUESDAY" ? 'selected' : '' }}>TUESDAY</option>
+                                        <option value="WEDNESDAY" {{ $lgus->schedule == "WEDNESDAY" ? 'selected' : '' }}>WEDNESDAY</option>
+                                        <option value="THURSDAY" {{ $lgus->schedule == "THURSDAY" ? 'selected' : '' }}>THURSDAY</option>
+                                        <option value="FRIDAY" {{ $lgus->schedule == "FRIDAY" ? 'selected' : '' }}>FRIDAY</option>
+                                        <option value="SUTURDAY" {{ $lgus->schedule == "SUTURDAY" ? 'selected' : '' }}>SUTURDAY</option>
+                                        <option value="SUNDAY" {{ $lgus->schedule == "SUNDAY" ? 'selected' : '' }}>SUNDAY</option>
                                     </select>
                                     @error('schedule')
                                     <span class="invalid-feedback" role="alert">
@@ -149,10 +150,10 @@
                             <select name="role" id=""
                                 class="form-control @error('role') is-invalid @enderror">
                                 <option selected value="" disabled>Select Role</option>
-                                <option value="Captain" @if (old('role') == 'Captain') selected="selected" @endif>Captain</option>
-                                <option value="Councilor" @if (old('role') == 'Councilor') selected="selected" @endif>Councilor</option>
-                                <option value="Secretary" @if (old('role') == 'Secretary') selected="selected" @endif>Secretary</option>
-                                <option value="Treasurer" @if (old('role') == 'Treasurer') selected="selected" @endif>Treasurer</option>
+                                <option value="Captain" {{ $lgus->role == "Captain" ? 'selected' : '' }}>Captain</option>
+                                <option value="Councilor" {{ $lgus->role == "Councilor" ? 'selected' : '' }}>Councilor</option>
+                                <option value="Secretary" {{ $lgus->role == "Secretary" ? 'selected' : '' }}>Secretary</option>
+                                <option value="Treasurer" {{ $lgus->role == "Treasurer" ? 'selected' : '' }}>Treasurer</option>
                             </select>
                                 @error('role')
                                 <span class="invalid-feedback" role="alert">

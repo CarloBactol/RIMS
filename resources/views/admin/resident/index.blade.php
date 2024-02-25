@@ -56,6 +56,7 @@
 
                 let thead = ` <tr>
                                 <th>First Name</th>
+                                <th>Middle Name</th>
                                 <th>Last Name</th>
                                 <th>Gender</th>
                                 <th>Address</th>
@@ -78,6 +79,7 @@
                     let row = '<tr>' +
 
                         '<td>' + result.firstName + '</td>' +
+                        '<td>' + result.middleName + '</td>' +
                         '<td>' + result.lastName + '</td>' +
                         '<td>' + result.gender + '</td>' +
                         '<td>' + result.address + '</td>' +
@@ -86,8 +88,7 @@
                         '<td>' + result.contactNumber + '</td>' +
                         '<td>' + result.civilStatus + '</td>' +
                         '<td>' + result.nationality + '</td>' +
-                        '<td>' + computeAgeWithMonths(result.dateOfBirth).years + ' year(s) old and ' +
-                        computeAgeWithMonths(result.dateOfBirth).months + " month(s)" + '</td>' +
+                        '<td>' + computeAgeWithMonths(result.dateOfBirth).years +  '</td>' +
                         '<td>' + result.dateOfBirth + '</td>' +
                         '<td>' +
                         '<a href="/admin/persons/' + result.id +

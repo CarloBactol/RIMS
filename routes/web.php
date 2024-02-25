@@ -11,8 +11,10 @@ use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\BarangayLGUController;
 use App\Http\Controllers\BusinessPermitController;
+use App\Http\Controllers\CertLog;
 use App\Http\Controllers\CreateBlotter;
 use App\Http\Controllers\PeopleController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,7 @@ Route::middleware(['auth', 'isUserRole'])->prefix('admin')->group(function () {
     Route::resource('business_permits', BusinessPermitController::class)->except('show');
     Route::resource('user_infos', UserInfo::class)->except('show');
     Route::resource('baranagay_l_g_u_s', BarangayLGUController::class)->except('show');
+    Route::resource('cert_logs', CertLog::class)->except('show');
     // Route::resource('blotters', BlotterController::class);
 
     // blottersController

@@ -22,9 +22,36 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     @yield('css-custom')
+   
 </head>
+<style>
+    body {
+        font-family: 'Nunito', sans-serif;
+        background-image: url("{{ asset('./images/bgcover.jpg') }}");
+        height: 100vh;
+        width: 100vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center; 
+        object-fit: contain;
+    }
+    .navbar{
+        background-color: rgba(255, 255, 255, 0.4) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        backdrop-filter: blur(5px) !important;
+        font-weight: bold !important;
+    }
+    .card{
+        background-color: rgba(255, 255, 255, 0.4) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        backdrop-filter: blur(5px) !important;
+        padding: 20px !important;
+        margin: 30px !important;
+        font-weight: bold !important;
+    }
+</style>
 
-<body>
+<body >
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

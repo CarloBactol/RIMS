@@ -28,14 +28,18 @@
                                     $dt1 = \Carbon\Carbon::parse($item->last_login_at);
                                     $dt2 = \Carbon\Carbon::parse($item->last_logout_at);
                                     @endphp
-                                    {{
+                                    {{-- {{
                                     $dt1->diffForHumans()
-                                    }}
+                                    }} --}}
+                                    {{ date('j F, Y ', strtotime( $item->last_login_at)) }}
                                     {{-- {{ date('j F, Y H:i:s', strtotime( $item->last_login_at)) }} --}}
 
                                 </td>
-                                <td>{{ $dt2->diffForHumans()}}</td>
+                                {{-- <td>{{ $dt2->diffForHumans()}}</td> --}}
                                 {{-- <td>{{ $item->last_logout_at }}</td> --}}
+                               <td>
+                                {{ date('j F, Y ', strtotime( $item->last_logout_at)) }}
+                               </td>
 
                             </tr>
                             @endforeach

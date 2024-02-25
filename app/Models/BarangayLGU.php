@@ -19,6 +19,9 @@ class BarangayLGU extends Model
         'lastName',
         'isSecretary',
         'isTreasurer',
+        'address',
+        'contactNo',
+        'schedule',
         'role'
     ];
 }

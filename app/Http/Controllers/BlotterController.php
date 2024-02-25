@@ -73,8 +73,8 @@ class BlotterController extends Controller
     {
         $blotters = Blotter::find($id);
         $captain =  BarangayLGU::where('role', 'Captain')->first();
-        $secretary =  BarangayLGU::where('role', 'Councilors')->where('isSecretary', true)->first();
-        $treasurer =  BarangayLGU::where('role', 'Councilors')->where('isTreasurer', true)->first();
+        $secretary =  BarangayLGU::where('role', 'Secretary')->where('isSecretary', false)->first();
+        $treasurer =  BarangayLGU::where('role', 'Treasurer')->where('isTreasurer', false)->first();
 
     return view('admin.blotter.show', compact('blotters',  'captain', 'secretary', 'treasurer'));
     }

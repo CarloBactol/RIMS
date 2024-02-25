@@ -67,7 +67,7 @@ class HomeController extends Controller
             '3-5 years' => 0,
             '6-12 years' => 0,
             '13-17 years' => 0,
-            '18-69 years' => 0,
+            '18-59 years' => 0,
             '60+ years' => 0
         ];
         
@@ -89,7 +89,7 @@ class HomeController extends Controller
             } elseif ($age >= 13 && $age <= 17) {
                 $ageGroups['13-17 years']++;
             } elseif ($age >= 18 && $age <= 69) {
-                $ageGroups['18-69 years']++;
+                $ageGroups['18-59 years']++;
             } elseif ($age >= 60) {
                 $ageGroups['60+ years']++;
             }

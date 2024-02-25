@@ -28,7 +28,20 @@
                                     </span>
                                     @enderror
                                 </div>
-
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="fname">Middle Name</label>
+                                    <input type="text"
+                                        class="form-control  @error('middleName') is-invalid @enderror"
+                                        name="middleName" value="{{ $resident->middleName }}" id="fname"
+                                        placeholder="First Name">
+                                    @error('middleName')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -43,24 +56,13 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group mt-2">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control  @error('address') is-invalid @enderror"
-                                        name="address" value="{{ $resident->address }}" id="address"
-                                        placeholder="Address">
-                                    @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                          
+                         
                         </div>
 
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="contactNumber">Phone Number</label>
                                     <input type="text" value="{{ $resident->contactNumber }}"
@@ -74,7 +76,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
                                     <select name="gender" class="form-control">
@@ -92,13 +94,26 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="dateOfBirth">Date Of Birth</label>
                                     <input type="date" value="{{ date('Y-m-d', strtotime($resident->dateOfBirth))  }}"
                                         class="form-control  @error('dateOfBirth') is-invalid @enderror"
                                         name="dateOfBirth" id="dateOfBirth">
                                     @error('dateOfBirth')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control  @error('address') is-invalid @enderror"
+                                        name="address" value="{{ $resident->address }}" id="address"
+                                        placeholder="Address">
+                                    @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -164,7 +179,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <div class="form-check form-check-flat form-check-primary">
                                 <label class="form-check-label">
                                     <input type="checkbox" {{ $resident->status ==
@@ -172,7 +187,7 @@
                                     Status
                                     <i class="input-helper"></i></label>
                             </div>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary me-2" id="btnSubmit">Submit</button>
                         <a href="{{ route('persons.index') }}" class="btn btn-light">Cancel</a>
 

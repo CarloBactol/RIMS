@@ -20,7 +20,13 @@
                 <span class="menu-title">Business Permit</span>
             </a>
         </li>
-
+        
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('cert_logs.index') }}">
+                <i class="mdi menu-icon mdi-comment-check"></i>
+                <span class="menu-title">Certificate Logs</span>
+            </a>
+        </li>
         {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('blotters.index') }}">
                 <i class="mdi menu-icon mdi mdi-comment-check"></i>

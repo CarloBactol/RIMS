@@ -11,6 +11,7 @@ class Resident extends Model
     // Add other fields that you want to be mass-assignable
     protected $fillable = [
         'firstName',
+        'middleName',
         'lastName',
         'dateOfBirth',
         'age',
@@ -20,22 +21,12 @@ class Resident extends Model
         'contactNumber',
         'gender',
         'barangay',
-        'status',
         'purpose',
         'isBlotter',
     ];
 
     // Relationship with Information Filing
-    public function informationFilings()
-    {
-        return $this->hasMany(InformationFiling::class, 'residentID', 'id');
-    }
 
-    // Relationship with Blotter Records
-    public function blotterRecords()
-    {
-        return $this->hasMany(BlotterRecord::class, 'residentID', 'id')->withDefault(true);
-    }
 
     // Relationship with Certificates
     public function certificates()
@@ -47,5 +38,10 @@ class Resident extends Model
     public function business()
     {
         return $this->hasOne(BusinessPermit::class, 'residentID', 'id')->withDefault(true);
+    }
+
+    public function certLog()
+    {
+        return $this->hasOne(CertifacteLog::class, 'residentID', 'id')->withDefault(true);
     }
 }
