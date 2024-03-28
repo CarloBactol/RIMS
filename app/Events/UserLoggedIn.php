@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -27,6 +28,11 @@ class UserLoggedIn
     {
         $this->user = $user;
     }
+
+    // public function __construct(Activity $user)
+    // {
+    //     $this->user = $user;
+    // }
 
     /**
      * Get the channels the event should broadcast on.

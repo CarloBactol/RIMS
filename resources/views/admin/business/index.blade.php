@@ -1,104 +1,169 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="container-fluid">
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-2">
-                        <h4 class="card-title">Permit to Operate</h4>
-                        <a title="new" href="{{ route('business_permits.create') }}"
-                            class="btn btn-sm btn-info py-2 mb-2">Add Permit</a>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th>Owner Name</th>
-                                    <th>Business Name</th>
-                                    <th>Business Address</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($business as $item)
-                                    <tr>
-                                        <td>{{ Str::ucfirst($item->resident->firstName) . ' ' . Str::ucfirst($item->resident->lastName) }}
-                                        </td>
-                                        <td>{{ Str::ucfirst($item->businessName) }}</td>
-                                        <td>{{ Str::ucfirst($item->businessAddress) }}</td>
-                                        {{-- <td><label
-                                                class=" {{ $item->resident->status == '1' ? 'text-success' : 'text-danger' }}">{{ $item->resident->status == '1' ? 'Active' : 'Inactive' }}</label>
-                                        </td> --}}
-                                        <td>
-                                            <a href="{{ route('business_permits.edit', $item->id) }}"
-                                                class="btn btn-info py-1 btn-icon float-start me-2">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
 
-                                            {{-- <a href="{{ route('business_permits.show', $item->id) }}"
-                                        class="btn btn-secondary py-1 btn-icon float-start me-2">
-                                        <i class="fas fa-print"></i>
-                                    </a> --}}
-                                            {{--
-                                    <form method="post" action="{{ route('business_permits.destroy', $item->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger py-1 btn-icon">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form> --}}
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal{{ $item->id }}">
-                                                <i class="fas fa-trash" style="margin: 4px 0px"></i>
-                                            </button>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Confirmation!
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Are you sure you want to delete this record?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Cancel</button>
-                                                            <!-- Actual delete form -->
-                                                            <form
-                                                                action="{{ route('business_permits.destroy', $item->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger my-2">Delete</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+    <div class="row">
+        <div class="col-md-3 my-2">
+            <input type="text" id="searchInput" class="form-control " placeholder="Search resident last name.">
+        </div>
+        <div class="col-md-2 my-2">
+            <a title="new" href="{{ route('persons.create') }}" class="btn btn-sm btn-info py-2 mb-2">Add
+                Resident</a>
+        </div>
+        <div class="col-md-2" id="btnList" style="display: none">
+            <a href="" class="btn btn-sm btn-outline-info " id="editLink"><i class="fas fa-edit"></i></a>
+            {{-- <a href="" class="btn btn-sm btn-outline-info " id="viewLink"><i class="fas fa-file"></i></a> --}}
+            {{-- <a href="" class="btn btn-sm btn-outline-info "><i class="fas fa-trash"></i></a> --}}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            <i class="fas fa-trash" ></i>
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this user?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <!-- Actual delete form -->
+                            <form action="" id="formDelete"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="btn btn-danger my-2">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    
     </div>
+    
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead id="tHead">
+               
+            </thead>
+            <tbody id="searchResultsBody"></tbody>
+        </table>
+    </div>
+
+
 @endsection
+
+
+
+
 @section('scripts')
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable();
-            $(".alert").show("slow").delay(3000).hide("slow");
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+            $('#searchInput').on('keyup', function() {
+                let query = $(this).val();
+
+                if (query.length >= 3) {
+                    $.ajax({
+                        url: '{{ route('search_permit.index') }}',
+                        type: 'GET',
+                        data: {
+                            query: query
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            displayResults(data);
+                        }
+                    });
+                } else {
+                    $('#tHead').empty();
+                    $('#searchResultsBody').empty();
+                }
+            });
+
+            // update
+            function displayResults(results) {
+                $('#tHead').empty();
+                $('#searchResultsBody').empty();
+                console.log(results);
+
+                let thead = ` <tr>
+                                <th></th>
+                                <th>Owner Name</th>
+                                <th>Business Name</th>
+                                <th>Business Address</th>
+                            </tr>`;
+                $('#tHead').append(thead);
+
+                $.each(results, function(index, result) {
+                    var id = result.id;
+                    var pMesage = result.purpose;
+                    pMesage = pMesage == null ? '' : pMesage
+
+                    let row = '<tr>' +
+
+                       `<td>
+                        <div class="form-check d-flex justify-content-center">
+                            <input class="form-check-input" type="checkbox" value="${result.id}" id="exampleCheckbox1">
+                            </label>
+                        </div>
+                        </td>` +
+                        '<td>' + result.resident.firstName + '</td>' +
+                        '<td>' + result.businessName + '</td>' +
+                        '<td>' + result.businessAddress + '</td>' +
+                        '</tr>';
+
+                  
+                    $('#searchResultsBody').append(row);
+
+                    // Update the form action dynamically for each modal
+                    $('#exampleModal' + result.id).on('show.bs.modal', function(event) {
+                        var modal = $(this);
+                        var formAction = "/admin/persons/" + result.id;
+
+                        modal.find('.modal-footer form').attr('action', formAction);
+                    });
+
+                     // Add change event listener to checkboxes
+                    $('.form-check-input').change(function(){
+
+                         // Disable all other radio inputs
+                        $('.form-check-input').not(this).prop('disabled', true);
+                        // Enable the selected radio input
+                        $(this).prop('disabled', false);
+
+                        // Check if the checkbox is checked
+                        if($(this).is(':checked')){
+                            // Get the value of the checked checkbox
+                            var value = $(this).val();
+                            console.log('Checked Checkbox Value:', value);
+                            // Update the href attribute of the anchor tag
+                             $('#editLink').attr('href', '/admin/business_permits/' + value + '/edit/');
+                            //  $('#viewLink').attr('href', '/admin/business_permits/' + value + '/show/');
+                             $('#deleteLink').attr('href', '/admin/business_permits/' + value + '/edit/');
+                             $('#formDelete').attr('action', '/admin/business_permits/' + value );
+
+                             // Show button 
+                             $('#btnList').css('display', 'block');
+                        }else{
+                            $('#btnList').css('display', 'none');
+                            // Enable all other radio inputs
+                            $('.form-check-input').not(this).prop('disabled', false);
+                        }
+                    });
+                });
+            }
+
         });
-    </script>
+</script>
 @endsection

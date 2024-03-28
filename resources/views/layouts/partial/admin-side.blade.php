@@ -2,7 +2,7 @@
     <ul class="nav">
         <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard') }}">
-                <i class="mdi mdi-grid-large menu-icon"></i>
+                <i class="mdi menu-icon mdi-chart-bar"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
@@ -16,34 +16,21 @@
         
         <li class="nav-item">
             <a class="nav-link" href="{{ route('business_permits.index') }}">
-                <i class="mdi menu-icon mdi mdi-comment-check"></i>
+                <i class="mdi menu-icon mdi-newspaper"></i>
                 <span class="menu-title">Business Permit</span>
             </a>
         </li>
         
         <li class="nav-item">
             <a class="nav-link" href="{{ route('cert_logs.index') }}">
-                <i class="mdi menu-icon mdi-comment-check"></i>
-                <span class="menu-title">Certificate Logs</span>
+                <i class="mdi menu-icon mdi-equal-box"></i>
+                <span class="menu-title">Activity Logs</span>
             </a>
         </li>
-        {{-- <li class="nav-item">
-            <a class="nav-link" href="{{ route('blotters.index') }}">
-                <i class="mdi menu-icon mdi mdi-comment-check"></i>
-                <span class="menu-title">Blotter</span>
-            </a>
-        </li> --}}
-{{-- 
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('Createblotters.store') }}">
-                <i class="mdi menu-icon mdi mdi-comment-check"></i>
-                <span class="menu-title">Blotter Person</span>
-            </a>
-        </li> --}}
    
         <li class="nav-item">
             <a class="nav-link" href="{{ route('baranagay_l_g_u_s.index') }}">
-                <i class="mdi menu-icon mdi mdi-comment-check"></i>
+                <i class="mdi menu-icon mdi mdi-account-multiple-plus-outline"></i>
                 <span class="menu-title">Councilor</span>
             </a>
         </li>
@@ -51,7 +38,7 @@
         <li class="nav-item nav-category">Blotter Record</li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#blotter" aria-expanded="false" aria-controls="blotter">
-                <i class="menu-icon mdi mdi-account-multiple"></i>
+                <i class="menu-icon mdi mdi-folder-outline"></i>
                 <span class="menu-title">Category</span>
                 <i class="menu-arrow"></i>
             </a>
@@ -69,6 +56,12 @@
 
         <li class="nav-item nav-category">Account Center</li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('user_infos.index') }}">
+                <i class="mdi menu-icon mdi-account"></i>
+                <span class="menu-title">Account</span>
+            </a>
+        </li>
+        {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
                 <i class="menu-icon mdi mdi-account-multiple"></i>
                 <span class="menu-title">Category</span>
@@ -84,7 +77,7 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> --}}
 
 
     </ul>

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
 <div class="container-fluid">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -83,7 +84,7 @@
                                         </div>
                                     </div>
 
-                                    @if ($isTrue->contains($item->respondent->id))
+                                    @if ($isTrue->contains($item->complainant->id))
                                     <a href="{{ route('blotters.show', $item->id) }}"
                                         class="btn btn-primary py-1 btn-icon float-start me-2">
                                         <i class="fas fa-file"></i>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PermitController;
 use App\Http\Controllers\UserInfo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,8 +44,9 @@ Route::middleware(['auth', 'isUserRole'])->prefix('admin')->group(function () {
     // Route::resource('residents', ResidentController::class);
 
     Route::get('/search', [SearchController::class, 'search'])->name('search.index');
+    Route::get('/search_permit', [SearchController::class, 'searchPermit'])->name('search_permit.index');
     Route::post('/person/{id}/confirm-delete', [SearchController::class, 'delete'])->name('residents.confirm-delete');
-    Route::resource('business_permits', BusinessPermitController::class)->except('show');
+    // Route::resource('business_permits', BusinessPermitController::class)->except('show');
     Route::resource('user_infos', UserInfo::class)->except('show');
     Route::resource('baranagay_l_g_u_s', BarangayLGUController::class)->except('show');
     Route::resource('cert_logs', CertLog::class)->except('show');
@@ -72,6 +74,15 @@ Route::middleware(['auth', 'isUserRole'])->prefix('admin')->group(function () {
     Route::get('/persons/create', [PersonController::class, 'create'])->name('persons.create');
     Route::post('/persons', [PersonController::class, 'store'])->name('persons.store');
     Route::delete('/persons/{id}', [PersonController::class, 'destroy'])->name('persons.destroy');
+
+    // Business Controller
+    Route::get('/business_permits', [PermitController::class, 'index'])->name('business_permits.index');
+    Route::get('/business_permits/{id}/show', [PermitController::class, 'show'])->name('business_permits.show');
+    Route::get('/business_permits/{id}/edit', [PermitController::class, 'edit'])->name('business_permits.edit');
+    Route::put('/business_permits/{id}/update', [PermitController::class, 'update'])->name('business_permits.update');
+    Route::get('/business_permits/create', [PermitController::class, 'create'])->name('business_permits.create');
+    Route::post('/business_permits', [PermitController::class, 'store'])->name('business_permits.store');
+    Route::delete('/business_permits/{id}', [PermitController::class, 'destroy'])->name('business_permits.destroy');
 
     Route::get('/trackings', [TrackingController::class, 'index'])->name('trackings.index');
 });

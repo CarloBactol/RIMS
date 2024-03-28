@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessPermit;
 use App\Models\Resident;
 use Illuminate\Http\Request;
 
@@ -35,6 +36,19 @@ class SearchController extends Controller
         });
 
         return response()->json($filteredResidents);
+    }
+
+
+    public function searchPermit(Request $request)
+    {
+        $query = $request->input('query');
+        $permit = BusinessPermit::with('resident')->get();
+
+        $result = $permit->filter(function ($name) use ($query) {
+            return stripos($name->businessName, $query) !== false;
+        });
+
+        return response()->json($result);
     }
 
 

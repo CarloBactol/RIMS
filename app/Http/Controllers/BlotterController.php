@@ -28,10 +28,10 @@ class BlotterController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-            $isTrue = Blotter::select('respondent_id')
-            ->groupBy('respondent_id')
+            $isTrue = Blotter::select('respondent_id', 'complainant_id')
+            ->groupBy('respondent_id', 'complainant_id')
             ->havingRaw('COUNT(*) >= 3')
-            ->pluck('respondent_id');
+            ->pluck('complainant_id');
 
         return view('admin.blotter.index', compact('blotters', 'search', 'isTrue' ));
     }

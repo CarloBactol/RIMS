@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CertifacteLog;
+use App\Models\Activity;
+use App\Models\Resident;
 use Illuminate\Http\Request;
+use App\Models\CertifacteLog;
+use App\Models\People;
 
 class CertLog extends Controller
 {
@@ -12,10 +15,17 @@ class CertLog extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $certLog = CertifacteLog::with("resident")->get();
-        return view("admin.certlog.index", compact("certLog"));
+        $search = $request->query('search');
+        // $certLog = CertifacteLog::with("resident")->get();
+        $certLog = Activity::when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%'.$search.'%') 
+            ->orWhere('type', 'like', '%'.$search.'%');
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+        return view("admin.certlog.index", compact("certLog", 'search'));
     }
 
     /**
@@ -36,10 +46,19 @@ class CertLog extends Controller
      */
     public function store(Request $request)
     {
-        $certLog = new CertifacteLog();
-        $certLog->residentID = $request->user_id;
-        $certLog->certificate_type = $request->certType;
-        $certLog->save();
+        // $certLog = new CertifacteLog();
+        // $certLog->residentID = $request->user_id;
+        // $certLog->certificate_type = $request->certType;
+        // $certLog->save();
+
+        $name = People::find($request->user_id);
+        // save to logs
+        $log = new Activity();
+        $log->name = $name->firstName . " ". substr($name->middleName, 0,1) . " ". $name->lastName;
+        $log->type = $request->certType;
+        $log->date_logs = now();
+        $log->save();
+
         return response()->json(["success" => "Successfully stored"]);
     }
 

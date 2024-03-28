@@ -40,6 +40,14 @@
         $(document).ready( function () {
             $('#myTable').DataTable();
             $(".alert").show("slow").delay(3000).hide("slow");
+            var person = @json($blotters);
+
+            // csrf
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
 
             // Indigency Certifcate
             async function generatePDFReport() {
@@ -239,8 +247,30 @@
              // === Buttons Click ===
              $(`#generateReport`).click(function(e) {
                         e.preventDefault();
-                        generatePDFReport();
+                        if (confirm("Are you sure you want to generate a blotter report?")) {
+                                // Code to delete the item goes here
+                                console.log("Item deleted!");
+                                PostLogs(`${person.respondent_id}`, "Blotter Report");
+                                generatePDFReport();
+                            } else {
+                                console.log("Deletion canceled.");
+                            }
+                        
                     });
+
+
+                    function PostLogs(userId, certType){
+                        console.log(userId);
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ route('cert_logs.store') }}",
+                            data: {user_id: userId, certType: certType},
+                            success: function (response) {
+                                console.log(response.success);
+                            },
+                        
+                        });
+                    }
             
 
         } );

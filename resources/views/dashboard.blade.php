@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="container mt-5 ">
                     <div class="cart">
-                        <h2>Total Residents Registered per Month</h2>
+                        <h2>Total Residents Registered Per Year</h2>
                     <canvas id="lineChart" width="400" height="200"></canvas>
                     </div>
                     <hr>

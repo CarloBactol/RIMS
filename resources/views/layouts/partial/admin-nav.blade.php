@@ -22,7 +22,7 @@
             <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
                 <h2>{{ config('app.name') }}</h2> 
                 <h5>Hello, <span class="text-black fw-bold">{{
-                    Str::ucfirst(Auth::user()->name) }}</small>
+                    Str::ucfirst(Auth::user()->name) }}!</small>
             </li>
             {{-- <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
                 <h1 class="welcome-text">Hello, <span class="text-black fw-bold">{{

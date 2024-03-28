@@ -23,10 +23,6 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function officerEncoded()
-    {
-        return $this->hasMany(BlotterRecord::class, 'officerID', 'id');
-    }
 
     /**
      * The attributes that should be hidden for serialization.

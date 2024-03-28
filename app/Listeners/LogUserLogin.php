@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Models\User;
-use App\Events\UserLoggedIn;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Activity;
+use App\Events\UserLoggedIn;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -18,7 +19,10 @@ class LogUserLogin  implements ShouldQueue
         $timestamp = now();
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'Asia/Manila'); // Use 'Asia/Manila' for Philippines timezone
         $date->setTimezone('UTC');
-        User::where('id', $event->user->id)
-            ->update(['last_login_at' => now()]);
+        echo $date;
+    //    $data =  User::where('id', $event->user->id)
+    //         ->update(['last_login_at' => now()]);
+        $data = Activity::create(['name' => $event->user->name, 'type' =>'Login', 'date_logs' => now()]);
+        return $data;
     }
 }
